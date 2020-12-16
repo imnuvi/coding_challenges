@@ -1,7 +1,19 @@
+let anim_array = [];
+
 
 function random_color(){
   thecol = color(random(0,255),random(0,255),random(0,255));
   return thecol;
+}
+
+function add_anim(x,y){
+  for (let i=0; i<5; i++){
+    anim_array.push(new rotate_anim(x,y,i));
+  }
+}
+
+function mouseClicked(){
+  add_anim(mouseX,mouseY);
 }
 
 function init(){
@@ -19,5 +31,9 @@ function setup(){
 
 function draw(){
   // fill(random_color());
+  for (anim of anim_array){
+    anim.update();
+    anim.show();
+  }
   circle(mouseX,mouseY,100);
 }

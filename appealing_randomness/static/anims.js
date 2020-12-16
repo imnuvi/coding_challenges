@@ -12,5 +12,5 @@ rotate_anim.prototype.update = function(){
 }
 
 rotate_anim.prototype.show = function(){
-  circle(this.pos.x + cos(this.ang) * this.rad, this.pos.x + cos(this.ang) * this.rad, this.size);
+  circle(this.pos.x + cos(this.ang) * this.rad, this.pos.y + sin(this.ang) * this.rad, this.size);
 }
