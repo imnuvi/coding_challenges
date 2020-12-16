@@ -6,7 +6,7 @@ let mokumokuSound, basabasa1Sound, basabasa2Sound;
 let walk1Sound, walk2Sound;
 
 // ローディングの変数
-let isLoading = true;
+let isLoading = false;
 let assetNumber = 12;
 let assetCounter = 0;
 
@@ -99,7 +99,7 @@ function setup(){
   colorMode(HSB, 360, 100, 100, 100);
 
   // データをロードする
-  loadAsset();
+  // loadAsset();
 
   // テキストを揃える
   textAlign(CENTER);
@@ -212,8 +212,8 @@ function introduction(){
   if(isTapped == false && txtAlpha > 0){
     txtAlpha-= 5;
     // 音を流す
-    bgmSound.loop();
-    bgmSound.amp(0.2);
+    // bgmSound.loop();
+    // bgmSound.amp(0.2);
 
   }else if(isTapped == false && txtAlpha < 0){
     txtAlpha = 0;
@@ -254,40 +254,40 @@ function touchStarted() {
     colorList(0, 0);
     // 上部をクリックしたときのアニメーション
     if(mouseY < height / 10){
-      suzu2Sound.play();
-      suzu2Sound.amp(0.1);
+      // suzu2Sound.play();
+      // suzu2Sound.amp(0.1);
       for(let i = 0; i < 30; i++){
         animations.push(new AnimationTop(i));
       }
     }
     // 下部をクリックしたときのアニメーション
     else if(mouseY > height / 10 * 9){
-      mokumokuSound.play();
-      mokumokuSound.amp(0.1);
+      // mokumokuSound.play();
+      // mokumokuSound.amp(0.1);
       for(let i = 0; i < 10; i++){
         animations.push(new AnimationBottom(mouseX, i));
       }
     }
     // 左端をクリックしたときのアニメーション
     else if(mouseX < width / 10){
-      basabasa2Sound.play();
-      basabasa2Sound.amp(0.2);
+      // basabasa2Sound.play();
+      // basabasa2Sound.amp(0.2);
       for(let i = 0; i < 20; i++){
         animations.push(new AnimationLeft(i));
       }
     }
     // 右端をクリックしたときのアニメーション
     else if(mouseX > width / 10 * 9){
-      basabasa1Sound.play();
-      basabasa1Sound.amp(0.2);
+      // basabasa1Sound.play();
+      // basabasa1Sound.amp(0.2);
       for(let i = 0; i < 5; i++){
         animations.push(new AnimationRight(i));
       }
     }
     // 中央を押したとき
     else if (mouseX > width / 2 - 10 && mouseX < width / 2 + 10 && mouseY > height / 2 - 10 &&  mouseY < height / 2 + 10){
-      drop3Sound.play();
-      drop3Sound.amp(0.1);
+      // drop3Sound.play();
+      // drop3Sound.amp(0.1);
       for(let i = 0; i < 10; i++){
         random(2)>1?
         animations.push(new AnimationCenter1(i)):
@@ -299,73 +299,73 @@ function touchStarted() {
     randomNumber = floor(random(11));
 
       if (randomNumber == 0) {
-        drop1Sound.play();
-        drop1Sound.amp(0.1);
+        // drop1Sound.play();
+        // drop1Sound.amp(0.1);
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch0(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 1) {
-        drop3Sound.play();
-        drop3Sound.amp(0.1);
+        // drop3Sound.play();
+        // drop3Sound.amp(0.1);
         for(let i = 0; i < 10; i++){
           animations.push(new AnimationTouch1(mouseX, mouseY));
         }
       }
       else if (randomNumber == 2) {
-        drop2Sound.play();
-        drop2Sound.amp(0.1);
+        // drop2Sound.play();
+        // drop2Sound.amp(0.1);
         for(let i = 0; i < 3; i++){
           animations.push(new AnimationTouch2(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 3) {
-        basabasa1Sound.play();
-        basabasa1Sound.amp(0.2);
+        // basabasa1Sound.play();
+        // basabasa1Sound.amp(0.2);
         animations.push(new AnimationTouch3());
       }
       else if (randomNumber == 4) {
-        walk2Sound.play();
-        walk2Sound.amp(0.1);
+        // walk2Sound.play();
+        // walk2Sound.amp(0.1);
         animations.push(new AnimationTouch4(mouseY));
       }
       else if (randomNumber == 5) {
-        suzu1Sound.play();
-        suzu1Sound.amp(0.1);
+        // suzu1Sound.play();
+        // suzu1Sound.amp(0.1);
         let n = random(50, 200);
         for(let i = 0; i < 5; i++){
         animations.push(new AnimationTouch5(mouseX, mouseY, i, n));
         }
       }
       else if (randomNumber == 6) {
-        suzu2Sound.play();
-        suzu2Sound.amp(0.1);
+        // suzu2Sound.play();
+        // suzu2Sound.amp(0.1);
         for(let i = 0; i < 20; i++){
           animations.push(new AnimationTouch6(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 7) {
-        suzu3Sound.play();
-        suzu3Sound.amp(0.1);
+        // suzu3Sound.play();
+        // suzu3Sound.amp(0.1);
         for(let i = 0; i < 10; i++){
           animations.push(new AnimationTouch7(mouseX, mouseY, i));
         }
       }
       else if (randomNumber == 8) {
-        walk2Sound.play();
-        walk2Sound.amp(0.1);
+        // walk2Sound.play();
+        // walk2Sound.amp(0.1);
         animations.push(new AnimationTouch8(mouseX));
       }
       else if (randomNumber == 9) {
-        drop1Sound.play();
-        drop1Sound.amp(0.1);
+        // drop1Sound.play();
+        // drop1Sound.amp(0.1);
         for(let i = 0; i <10; i++){
           animations.push(new AnimationTouch9());
         }
       }
       else if (randomNumber == 10) {
-        basabasa1Sound.play();
-        basabasa1Sound.amp(0.2);
+        // basabasa1Sound.play();
+        // basabasa1Sound.amp(0.2);
         animations.push(new AnimationTouch10());
       }
   }
@@ -374,8 +374,8 @@ function touchStarted() {
 // キー入力で呼び出す
 function keyTyped() {
   if(isPlayScreen == true){
-    walk1Sound.play();
-    walk1Sound.amp(0.1);
+    // walk1Sound.play();
+    // walk1Sound.amp(0.1);
     animations.push(new AnimationType(key));
     colorList(floor(random(360)), 100);
   }
