@@ -4,20 +4,6 @@ function random_color(){
   return thecol;
 }
 
-function reportsize(){
-	resizeCanvas(windowWidth,windowHeight);
-}
-
-
-// function reportsize(){
-// 	resizeCanvas(windowWidth,windowHeight);
-// 	init();
-// }
-
-
-window.addEventListener('resize', reportsize);
-
-
 function init(){
   ww = windowWidth;
   wh = windowHeight;
@@ -31,5 +17,6 @@ function setup(){
 }
 
 function draw(){
+  // fill(random_color());
   circle(mouseX,mouseY,100);
 }
