@@ -1,5 +1,7 @@
 function rotate_anim(x,y,i){
   this.pos = createVector(x,y);
+  // this.id = i;
+  this.id = map(i, 0, 5, 3, 1);
   this.ang = i;
   this.size = 5;
   this.rad = 100;
@@ -7,7 +9,7 @@ function rotate_anim(x,y,i){
 }
 
 rotate_anim.prototype.update = function(){
-  this.ang += 0.2;
+  this.ang += 0.025 * (this.id + 1);
   this.lifetime--;
 }
 

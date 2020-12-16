@@ -30,10 +30,12 @@ function setup(){
 }
 
 function draw(){
-  // fill(random_color());
+
+  background(0);
   for (anim of anim_array){
+    fill(random_color());
     anim.update();
     anim.show();
   }
-  circle(mouseX,mouseY,100);
+  // circle(mouseX,mouseY,100);
 }
