@@ -5,6 +5,7 @@ function random_color(){
 }
 
 function init(){
+  pixelDensity(2);
   ww = windowWidth;
   wh = windowHeight;
   canvas = createCanvas(ww,wh);
