@@ -8,8 +8,14 @@ function rotate_anim(x,y,i){
   this.lifetime = 200;
 }
 
+// rotate_anim.prototype.update = function(){
+//   this.ang += 0.025 * (this.id + 1);
+//   this.lifetime--;
+// }
+
 rotate_anim.prototype.update = function(){
-  this.ang += 0.025 * (this.id + 1);
+  this.rad += 1;
+  this.size += 1;
   this.lifetime--;
 }
 

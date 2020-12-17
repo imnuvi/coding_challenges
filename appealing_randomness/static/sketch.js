@@ -33,7 +33,7 @@ function draw(){
 
   background(0);
   for (anim of anim_array){
-    fill(random_color());
+    // fill(random_color());
     anim.update();
     anim.show();
   }
