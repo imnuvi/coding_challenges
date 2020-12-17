@@ -7,7 +7,7 @@ function random_color(){
 }
 
 function add_anim(x,y){
-  for (let i=0; i<5; i++){
+  for (let i=0; i<1; i++){
     anim_array.push(new power_animation(x,y,i,1));
   }
 }
