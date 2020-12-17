@@ -27,9 +27,9 @@ rotate_anim.prototype.show = function(){
 function power_animation(x,y,i,dir){
   this.pos = createVector(x,y);
   this.show_pos = this.pos.copy();
-  this.id = i;
+  this.id = map(i, 0, 5, 3, 1);;
   this.dir = dir;
-  this.ang = i*10;
+  this.ang = map(i, 0, 5, 0, 360);
   this.size = 5;
   this.rad = 100;
   this.lifetime = 200;
@@ -37,11 +37,11 @@ function power_animation(x,y,i,dir){
 
 power_animation.prototype = {
   update: function(){
-    this.ang += 10;
+    // this.ang += 0.3*(5-this.id+1);
+    this.ang += 3*(this.id);
     angleMode(DEGREES);
     this.show_pos.y = this.pos.y + map(sin(this.ang),-1,1,-this.rad/2,this.rad/2);
-    console.log(this.pos.y);
-    console.log(map(sin(this.ang),-1,1,-10,10));
+    this.show_pos.x = this.pos.x + map(cos(this.ang),-1,1,-this.rad/2,this.rad/2);
   },
 
   show: function(){
