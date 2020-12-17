@@ -18,6 +18,7 @@ function mouseClicked(){
 
 function init(){
   pixelDensity(2);
+  noStroke();
   ww = windowWidth;
   wh = windowHeight;
   canvas = createCanvas(ww,wh);

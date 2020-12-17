@@ -15,6 +15,7 @@ function rotate_anim(x,y,i){
 
 rotate_anim.prototype.update = function(){
   this.rad += 1;
+  this.ang += 0.025*this.id;
   this.size += 1;
   this.lifetime--;
 }
