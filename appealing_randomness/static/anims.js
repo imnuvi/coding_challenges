@@ -66,16 +66,22 @@ power_animation.prototype = {
     this.ang += 3*(this.id);
     angleMode(DEGREES);
     if (this.dir){
-      this.show_pos.y = this.pos.y + map(sin(this.ang),-1,1,-this.rad,this.rad);
-      this.show_pos.x = this.pos.x + map(cos(this.ang),-1,1,-this.rad/3,this.rad/3);
+      this.show_pos.y = map(sin(this.ang),-1,1,-this.rad,this.rad); // this.pos.y;
+      this.show_pos.x = map(cos(this.ang),-1,1,-this.rad/9,this.rad/9); // this.pos.x;
     }
     else{
-      this.show_pos.y = this.pos.y + map(sin(this.ang),-1,1,-this.rad/3,this.rad/3);
-      this.show_pos.x = this.pos.x + map(cos(this.ang),-1,1,-this.rad,this.rad);
+      this.show_pos.y = map(sin(this.ang),-1,1,-this.rad/9,this.rad/9); // this.pos.y;
+      this.show_pos.x = map(cos(this.ang),-1,1,-this.rad,this.rad); // this.pos.x;
     }
   },
 
   show: function(){
+    push();
+    translate(this.pos.x,this.pos.y);
+    rotate(135);
     circle(this.show_pos.x,this.show_pos.y,this.size);
+    pop();
+    circle(this.show_pos.x + this.pos.x ,this.show_pos.y + this.pos.y ,this.size);
+
   }
 }
