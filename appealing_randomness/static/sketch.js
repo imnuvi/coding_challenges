@@ -1,6 +1,6 @@
 let anim_array = [];
 
-let power_lifetime = 100;
+let power_lifetime = 130;
 
 let accent_col;
 

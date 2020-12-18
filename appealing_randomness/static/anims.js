@@ -61,7 +61,7 @@ function power_animation(x,y,i,dir,rad){
   this.size = 2;
   this.rad = rad;
   this.lifetime = power_lifetime;
-  this.alpha = 100;
+  this.alpha = random(60,100);
 }
 
 power_animation.prototype = {
@@ -75,7 +75,7 @@ power_animation.prototype = {
     this.lifetime -= 1;
     this.alpha = map(this.lifetime,0,power_lifetime,40,200);
     // this.size = map(this.lifetime,0,power_lifetime,4,20);
-    this.ang += 3*(this.id);
+    this.ang += 2*(this.id);
     angleMode(DEGREES);
     if (this.dir){
       this.show_pos.y = map(sin(this.ang),-1,1,-this.rad,this.rad); // this.pos.y;
