@@ -50,7 +50,7 @@ rotor_animation.prototype = {
   }
 }
 
-function power_animation(x,y,i,dir){
+function power_animation(x,y,i,dir,rad){
   this.alive = true;
   this.pos = createVector(x,y);
   this.show_pos = this.pos.copy();
@@ -58,8 +58,8 @@ function power_animation(x,y,i,dir){
   this.dir = dir;
   // this.val = random(0.4,1.4);
   this.ang = map(i, 0, 5, 0, 360);
-  this.size = 5;
-  this.rad = 100;
+  this.size = 2;
+  this.rad = rad;
   this.lifetime = power_lifetime;
   this.alpha = 100;
 }
@@ -74,6 +74,7 @@ power_animation.prototype = {
     // this.ang += 0.3*(5-this.id+1);
     this.lifetime -= 1;
     this.alpha = map(this.lifetime,0,power_lifetime,40,200);
+    // this.size = map(this.lifetime,0,power_lifetime,4,20);
     this.ang += 3*(this.id);
     angleMode(DEGREES);
     if (this.dir){
