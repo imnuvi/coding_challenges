@@ -50,8 +50,9 @@ power_animation.prototype = {
 }
 
 
-function explosion_animation(x,y,level){
+function explosion_animation(x,y,count,level){
   this.alive = true;
+  this.ang = 360/this.count;
   this.pos = createVector(x,y);
   this.size = random(2,5);
   this.speed = createVector(random(-2,2),random(-2,2));

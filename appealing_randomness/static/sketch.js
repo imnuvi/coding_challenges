@@ -18,7 +18,7 @@ function add_anim(x,y){
   //   anim_array.push(new power_animation(x,y,i,0,rad));
   // }
   for(let i=0; i<5; i++){
-    anim_array.push(new explosion_animation(x,y,1));
+    anim_array.push(new explosion_animation(x,y,i,1));
   }
 }
 
