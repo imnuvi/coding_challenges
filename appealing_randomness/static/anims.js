@@ -50,9 +50,9 @@ power_animation.prototype = {
 }
 
 
-function explosion_animation(x,y,count,level){
+function explosion_animation(x,y,count,level,val){
   this.alive = true;
-  this.ang = (level<=1) ? map(count+1,1,6,0,360) : random(0,360);
+  this.ang = (level<=1) ? map(count,0,val,0,360) : random(0,360);
   this.pos = createVector(x,y);
   this.size = (level<=1) ? random(3,5) : 2;
   // this.speed = createVector(random(-2,2),random(-2,2));
@@ -69,9 +69,12 @@ explosion_animation.prototype = {
       this.alive = false;
     }
     else if (this.lifetime <= 0){
+      console.log(anim_array);
+      console.log("meme");
       this.alive = false;
-      for(let i=0; i<10; i++){
-        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1));
+      cnt = 10
+      for(let i=0; i<=cnt; i++){
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1,cnt));
       }
     }
     this.lifetime--;

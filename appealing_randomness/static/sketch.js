@@ -1,7 +1,7 @@
 let anim_array = [];
 
 let power_lifetime = 130;
-let explosion_lifetime = 15;
+let explosion_lifetime = 20;
 
 let accent_col;
 
@@ -17,9 +17,12 @@ function add_anim(x,y){
   //   anim_array.push(new power_animation(x,y,i,1,rad));
   //   anim_array.push(new power_animation(x,y,i,0,rad));
   // }
-  for(let i=0; i<5; i++){
-    anim_array.push(new explosion_animation(x,y,i,1));
+  // val = Math.floor(random(3,10));
+  val = 3;
+  for(let i=0; i < val; i++){
+    anim_array.push(new explosion_animation(x,y,i,1,val));
   }
+  console.log(anim_array);
 }
 
 function mouseClicked(){
@@ -49,15 +52,15 @@ function setup(){
 function draw(){
 
   background(0);
-  for (anim of anim_array){
+  for (let i=0; i<anim_array.length; i++){
     // fill(random_color());
+    anim = anim_array[i];
     if (anim.alive){
       anim.update();
       anim.show();
     }
     else{
-      anim_pos = anim_array.indexOf(anim);
-      anim_array.splice(anim,1);
+      anim_array.splice(i,1);
     }
   }
   // circle(mouseX,mouseY,100);
