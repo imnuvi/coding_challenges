@@ -55,6 +55,16 @@ function explosion_animation(x,y){
   this.pos = createVector(x,y);
   this.size = random(2,7);
   this.speed = createVector(random(3,10),random(3,10));
+  this.lifetime = explosion_lifetime;
 }
 
-function
+explosion_animation.prototype = {
+  update: function(){
+      this.lifetime--;
+      this.pos.add(this.speed);
+  },
+
+  show: function(){
+    circle(this.pos.x,this.pos.y,this.size);
+  }
+}

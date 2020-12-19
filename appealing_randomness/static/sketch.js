@@ -1,6 +1,7 @@
 let anim_array = [];
 
 let power_lifetime = 130;
+let explosion_lifetime = 200;
 
 let accent_col;
 
@@ -12,9 +13,12 @@ function random_color(){
 
 function add_anim(x,y){
   rad = random(30,100);
-  for (let i=0; i<3; i++){
-    anim_array.push(new power_animation(x,y,i,1,rad));
-    anim_array.push(new power_animation(x,y,i,0,rad));
+  // for (let i=0; i<3; i++){
+  //   anim_array.push(new power_animation(x,y,i,1,rad));
+  //   anim_array.push(new power_animation(x,y,i,0,rad));
+  // }
+  for(let i=0; i<5; i++){
+    
   }
 }
 
