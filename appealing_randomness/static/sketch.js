@@ -19,19 +19,30 @@ function add_anim(random_selection,x,y){
       anim_array.push(new power_animation(x,y,i,0,rad));
     }
   }
-  else if(random_selection = 2){
+  else if(random_selection == 2){
     val = Math.floor(random(3,8));
     // val = 3;
     for(let i=0; i < val; i++){
       anim_array.push(new explosion_animation(x,y,i,1,val));
+    }
   }
-}
-  console.log(anim_array);
+  else if(random_selection == 3){
+    anim_array.push(new gravity_animation(x,y));
+    console.log(anim_array);
+  }
 }
 
 function mouseClicked(){
-  add_anim(Math.floor(random(1,3)),mouseX,mouseY);
+  add_anim(Math.floor(random(3,4)),mouseX,mouseY);
 }
+
+// function mouseMoved(){
+//   // console.log(Math.atan(radians((mouseX-ww/2)/(mouseY-wh/2))));
+//   push();
+//   // translate(ww/2,wh/2);
+//   console.log(createVector(ww/2,wh/2).angleBetween(createVector(mouseX-ww/2,mouseY-wh/2)));
+//   pop();
+// }
 
 function set_color(x,y){
   accent_col = color(x,y,255);
@@ -49,7 +60,7 @@ function init(){
 }
 
 function setup(){
-  angleMode(DEGREES)
+  angleMode(DEGREES);
   init();
 }
 

@@ -65,12 +65,9 @@ function explosion_animation(x,y,count,level,val){
 explosion_animation.prototype = {
   update: function(){
     if (this.lifetime <= 0 && this.level > 1){
-      console.log("bruh");
       this.alive = false;
     }
     else if (this.lifetime <= 0){
-      console.log(anim_array);
-      console.log("meme");
       this.alive = false;
       cnt = 10
       for(let i=0; i<=cnt; i++){
@@ -90,16 +87,34 @@ explosion_animation.prototype = {
 }
 
 function gravity_animation(x,y){
+  this.alive = true;
   this.pos = createVector(x,y);
-  this.speed = 2;
+  this.show_pos = this.pos.copy();
+  this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2));
+  this.speed = 5;
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;
+  // this.lifetime = 200;
   this.size = 10;
 }
 
 gravity_animation.prototype = {
-  
+  update: function(){
+    if (this.rad <= 0){
+      this.alive = false;
+    }
+    if (this.lifetime <= 0){
+      this.alive = false;
+    }
+    this.lifetime--;
+    this.rad -= 10;
+    this.ang += 10;
+    // this.pos.sub(createVector(this.speed*cos(this.ang),this.speed*sin(this.ang)));
+    this.show_pos.y = map(sin(this.ang),-1,1,-this.rad,this.rad);
+    this.show_pos.x = map(cos(this.ang),-1,1,-this.rad,this.rad);
+  },
+
   show: function(){
-    circle(this.x ,this.y, this.size);
+    circle(this.pos.x + this.show_pos.x ,this.pos.y + this.show_pos.y, this.size);
   }
 }
