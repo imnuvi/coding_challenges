@@ -50,21 +50,36 @@ power_animation.prototype = {
 }
 
 
-function explosion_animation(x,y){
+function explosion_animation(x,y,level){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.size = random(2,7);
-  this.speed = createVector(random(3,10),random(3,10));
+  this.size = random(2,5);
+  this.speed = createVector(random(-2,2),random(-2,2));
+  this.alpha = random(60,150);
+  this.level = level;
   this.lifetime = explosion_lifetime;
 }
 
 explosion_animation.prototype = {
   update: function(){
-      this.lifetime--;
-      this.pos.add(this.speed);
+    if (this.lifetime <= 0 && this.level > 1){
+      console.log("bruh");
+      this.alive = false;
+    }
+    else if (this.lifetime <= 0){
+      this.alive = false;
+      for(let i=0; i<10; i++){
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,this.level+1));
+      }
+    }
+    this.lifetime--;
+    this.pos.add(this.speed);
+    this.alpha = map(this.lifetime,0,explosion_lifetime,40,200);
   },
 
   show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
     circle(this.pos.x,this.pos.y,this.size);
   }
 }
