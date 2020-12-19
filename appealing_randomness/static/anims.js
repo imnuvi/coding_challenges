@@ -88,3 +88,18 @@ explosion_animation.prototype = {
     circle(this.pos.x,this.pos.y,this.size);
   }
 }
+
+function gravity_animation(x,y){
+  this.pos = createVector(x,y);
+  this.speed = 2;
+  this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
+  this.lifetime = this.speed * this.rad;
+  this.size = 10;
+}
+
+gravity_animation.prototype = {
+  
+  show: function(){
+    circle(this.x ,this.y, this.size);
+  }
+}
