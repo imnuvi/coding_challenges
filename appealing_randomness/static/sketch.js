@@ -11,22 +11,26 @@ function random_color(){
   return thecol;
 }
 
-function add_anim(x,y){
-  rad = random(30,100);
-  // for (let i=0; i<3; i++){
-  //   anim_array.push(new power_animation(x,y,i,1,rad));
-  //   anim_array.push(new power_animation(x,y,i,0,rad));
-  // }
-  // val = Math.floor(random(3,10));
-  val = 3;
-  for(let i=0; i < val; i++){
-    anim_array.push(new explosion_animation(x,y,i,1,val));
+function add_anim(random_selection,x,y){
+  if (random_selection == 1){
+    rad = random(30,100);
+    for (let i=0; i<3; i++){
+      anim_array.push(new power_animation(x,y,i,1,rad));
+      anim_array.push(new power_animation(x,y,i,0,rad));
+    }
   }
+  else if(random_selection = 2){
+    val = Math.floor(random(3,7));
+    // val = 3;
+    for(let i=0; i < val; i++){
+      anim_array.push(new explosion_animation(x,y,i,1,val));
+  }
+}
   console.log(anim_array);
 }
 
 function mouseClicked(){
-  add_anim(mouseX,mouseY);
+  add_anim(Math.floor(random(1,3)),mouseX,mouseY);
 }
 
 function set_color(x,y){
