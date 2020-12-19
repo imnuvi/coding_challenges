@@ -20,7 +20,7 @@ function add_anim(random_selection,x,y){
     }
   }
   else if(random_selection = 2){
-    val = Math.floor(random(3,7));
+    val = Math.floor(random(3,8));
     // val = 3;
     for(let i=0; i < val; i++){
       anim_array.push(new explosion_animation(x,y,i,1,val));

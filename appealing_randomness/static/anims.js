@@ -56,7 +56,7 @@ function explosion_animation(x,y,count,level,val){
   this.pos = createVector(x,y);
   this.size = (level<=1) ? random(3,5) : 2;
   // this.speed = createVector(random(-2,2),random(-2,2));
-  this.speed = (level<=1) ? 4 : random(0,4);
+  this.speed = (level<=1) ? 4 : random(0,2);
   this.alpha = random(60,150);
   this.level = level;
   this.lifetime = explosion_lifetime;
