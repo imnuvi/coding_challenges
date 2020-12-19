@@ -35,6 +35,9 @@ function add_anim(random_selection,x,y){
 function mouseClicked(){
   add_anim(Math.floor(random(3,4)),mouseX,mouseY);
 }
+function mouseMoved(){
+  add_anim(Math.floor(random(3,4)),mouseX,mouseY);
+}
 
 // function mouseMoved(){
 //   // console.log(Math.atan(radians((mouseX-ww/2)/(mouseY-wh/2))));
