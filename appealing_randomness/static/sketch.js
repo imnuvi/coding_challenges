@@ -1,7 +1,7 @@
 let anim_array = [];
 
 let power_lifetime = 130;
-let explosion_lifetime = 30;
+let explosion_lifetime = 15;
 
 let accent_col;
 
@@ -42,6 +42,7 @@ function init(){
 }
 
 function setup(){
+  angleMode(DEGREES)
   init();
 }
 

@@ -52,10 +52,11 @@ power_animation.prototype = {
 
 function explosion_animation(x,y,count,level){
   this.alive = true;
-  this.ang = 360/this.count;
+  this.ang = (level<=1) ? map(count+1,1,6,0,360) : random(0,360);
   this.pos = createVector(x,y);
-  this.size = random(2,5);
-  this.speed = createVector(random(-2,2),random(-2,2));
+  this.size = (level<=1) ? random(3,5) : 2;
+  // this.speed = createVector(random(-2,2),random(-2,2));
+  this.speed = (level<=1) ? 4 : random(0,4);
   this.alpha = random(60,150);
   this.level = level;
   this.lifetime = explosion_lifetime;
@@ -70,11 +71,11 @@ explosion_animation.prototype = {
     else if (this.lifetime <= 0){
       this.alive = false;
       for(let i=0; i<10; i++){
-        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,this.level+1));
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1));
       }
     }
     this.lifetime--;
-    this.pos.add(this.speed);
+    this.pos.add(createVector(cos(this.ang)*this.speed,sin(this.ang)*this.speed));
     this.alpha = map(this.lifetime,0,explosion_lifetime,40,200);
   },
 
