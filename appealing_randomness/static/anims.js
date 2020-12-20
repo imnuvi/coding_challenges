@@ -57,7 +57,7 @@ function explosion_animation(x,y,count,level,val){
   this.size = (level<=1) ? random(3,5) : 2;
   // this.speed = createVector(random(-2,2),random(-2,2));
   this.speed = (level<=1) ? 4 : random(0,2);
-  this.alpha = random(60,150);
+  this.alpha = random(60,200);
   this.level = level;
   this.lifetime = explosion_lifetime;
 }
@@ -86,11 +86,11 @@ explosion_animation.prototype = {
   }
 }
 
-function gravity_animation(x,y){
+function gravity_animation(x,y,i){
   this.alive = true;
   this.pos = createVector(x,y);
   this.show_pos = this.pos.copy();
-  this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + 20;
+  this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + (20 * i);
   this.speed = 4;
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;

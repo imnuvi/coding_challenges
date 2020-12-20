@@ -27,8 +27,10 @@ function add_anim(random_selection,x,y){
     }
   }
   else if(random_selection == 3){
-    anim_array.push(new gravity_animation(x,y));
-    console.log(anim_array);
+    for (let i=0; i<8; i++){
+      anim_array.push(new gravity_animation(x,y,i));
+      // console.log(anim_array);
+    }
   }
 }
 
