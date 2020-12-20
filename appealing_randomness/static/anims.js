@@ -88,6 +88,7 @@ explosion_animation.prototype = {
 
 function gravity_animation(x,y,i){
   this.alive = true;
+  this.id = i;
   this.pos = createVector(x,y);
   this.show_pos = this.pos.copy();
   this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + (20 * i);
@@ -95,7 +96,7 @@ function gravity_animation(x,y,i){
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;
   // this.lifetime = 200;
-  this.size = 2;
+  this.size = map(this.id,0,8,1,2);
   this.alpha = 200;
 }
 
@@ -120,5 +121,28 @@ gravity_animation.prototype = {
     fill(accent_col);
     // circle(this.pos.x + this.show_pos.x ,this.pos.y + this.show_pos.y, this.size);
     circle(ww/2 + this.show_pos.x ,wh/2 + this.show_pos.y, this.size);
+  }
+}
+
+
+function lightning_animation(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.size = 10;
+  this.ang = random(0,360);
+  this.rad = Math.max(dist(this.pos.x,this.pos.y,0,0),dist(this.pos.x,this.pos.y,ww,wh),dist(this.pos.x,this.pos.y,0,wh),dist(this.pos.x,this.pos.y,ww,0));
+  this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
+  this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+}
+
+lightning_animation.prototype = {
+  update: function(){
+
+  },
+
+  show: function(){
+    stroke(accent_col);
+    strokeWeight(this.size);
+    line(this.pos.x + this.point1.x, this.pos.y + this.point1.y,this.pos.x + this.point2.x, this.pos.y + this.point2.y);
   }
 }
