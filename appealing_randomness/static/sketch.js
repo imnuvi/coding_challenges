@@ -3,7 +3,7 @@ let anim_array = [];
 let power_lifetime = 80;
 let explosion_lifetime = 20;
 let lightning_lifetime = 5;
-let humongous_lifetime = 600;
+let humongous_lifetime = 60;
 
 let accent_col;
 
@@ -80,7 +80,6 @@ function init(){
 
 function setup(){
   angleMode(DEGREES);
-  frameRate(10);
   init();
 }
 

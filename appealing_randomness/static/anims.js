@@ -170,7 +170,7 @@ function humongous_animation(x,y,i){
   this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
   this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
   this.lifetime = humongous_lifetime;
-  this.alpha = 2;
+  this.alpha = 10;
 }
 
 humongous_animation.prototype = {
@@ -179,8 +179,8 @@ humongous_animation.prototype = {
       this.alive = false;
     }
     this.lifetime--;
-    // this.alpha++;
-    // this.rad -= 20;
+    this.alpha = map(this.lifetime,0,humongous_lifetime,100,0);
+    this.rad -= 20;
     // this.ang += 10;
     // this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
     // this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
