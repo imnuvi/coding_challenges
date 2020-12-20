@@ -3,6 +3,7 @@ let anim_array = [];
 let power_lifetime = 80;
 let explosion_lifetime = 20;
 let lightning_lifetime = 5;
+let humongous_lifetime = 600;
 
 let accent_col;
 
@@ -30,7 +31,7 @@ function add_anim(random_selection,x,y){
   else if(random_selection == 3){
     console.log(anim_array);
     for (let i=0; i<1; i++){
-      anim_array.push(new lightning_animation(x,y,i));
+      anim_array.push(new humongous_animation(x,y,i));
     }
   }
 
@@ -42,8 +43,8 @@ function add_anim(random_selection,x,y){
   }
 }
 
-function mouseClicked(){
-  add_anim(Math.floor(random(1,4)),mouseX,mouseY);
+function mouseReleased(){
+  add_anim(Math.floor(random(3,4)),mouseX,mouseY);
 }
 
 // function mouseMoved(){
