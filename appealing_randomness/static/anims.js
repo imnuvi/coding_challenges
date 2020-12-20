@@ -166,9 +166,11 @@ function humongous_animation(x,y,i){
   this.pos = createVector(x,y);
   this.size = 1;
   this.ang = random(0,360);
-  this.rad = Math.max(dist(this.pos.x,this.pos.y,0,0),dist(this.pos.x,this.pos.y,ww,wh),dist(this.pos.x,this.pos.y,0,wh),dist(this.pos.x,this.pos.y,ww,0));
+  // this.rad = Math.max(dist(this.pos.x,this.pos.y,0,0),dist(this.pos.x,this.pos.y,ww,wh),dist(this.pos.x,this.pos.y,0,wh),dist(this.pos.x,this.pos.y,ww,0)) * 2;
+  this.rad = dist(0,0,ww/2,wh/2);
   this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
   this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+  // this.lifetime = map(this.rad,dist(ww/2,wh/2,0,0),dist(0,0,ww,wh),30,humongous_lifetime);
   this.lifetime = humongous_lifetime;
   this.alpha = 10;
 }
@@ -179,8 +181,8 @@ humongous_animation.prototype = {
       this.alive = false;
     }
     this.lifetime--;
-    this.alpha = map(this.lifetime,0,humongous_lifetime,100,0);
-    this.rad -= 20;
+    this.alpha = map(this.lifetime,30,humongous_lifetime,30,0);
+    this.rad -= 15;
     // this.ang += 10;
     // this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
     // this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
