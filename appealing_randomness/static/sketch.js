@@ -80,6 +80,7 @@ function init(){
 
 function setup(){
   angleMode(DEGREES);
+  frameRate(10);
   init();
 }
 
@@ -90,11 +91,13 @@ function draw(){
     // fill(random_color());
     anim = anim_array[i];
     if (anim.alive){
-      anim.update();
-      anim.show();
+      push()
+        anim.update();
+        anim.show();
+      pop();
     }
     else{
-      anim_array.splice(i,1);
+      anim_array.splice(i--,1);
     }
   }
   // circle(mouseX,mouseY,100);
