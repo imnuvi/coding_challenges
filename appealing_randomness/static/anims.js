@@ -125,24 +125,37 @@ gravity_animation.prototype = {
 }
 
 
-function lightning_animation(x,y){
+function lightning_animation(x,y,i){
   this.alive = true;
+  this.id = i;
   this.pos = createVector(x,y);
-  this.size = 10;
+  this.size = 1;
   this.ang = random(0,360);
   this.rad = Math.max(dist(this.pos.x,this.pos.y,0,0),dist(this.pos.x,this.pos.y,ww,wh),dist(this.pos.x,this.pos.y,0,wh),dist(this.pos.x,this.pos.y,ww,0));
   this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
   this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+  this.lifetime = lightning_lifetime;
+  this.alpha = 100;
 }
 
 lightning_animation.prototype = {
   update: function(){
+    if (this.lifetime <= 0 ){
+      this.alive = false;
+    }
+    this.lifetime--;
+    // this.ang += 10;
+    // this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
+    // this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
 
+    // this.size -= 2;
   },
 
   show: function(){
+    accent_col.setAlpha(this.alpha);
     stroke(accent_col);
     strokeWeight(this.size);
     line(this.pos.x + this.point1.x, this.pos.y + this.point1.y,this.pos.x + this.point2.x, this.pos.y + this.point2.y);
+    noStroke();
   }
 }

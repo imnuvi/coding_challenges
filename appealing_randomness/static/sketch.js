@@ -2,6 +2,7 @@ let anim_array = [];
 
 let power_lifetime = 80;
 let explosion_lifetime = 20;
+let lightning_lifetime = 5;
 
 let accent_col;
 
@@ -27,28 +28,31 @@ function add_anim(random_selection,x,y){
     }
   }
   else if(random_selection == 3){
+    console.log(anim_array);
+    for (let i=0; i<1; i++){
+      anim_array.push(new lightning_animation(x,y,i));
+    }
+  }
+
+  else if(random_selection == 4){
     for (let i=0; i<8; i++){
       anim_array.push(new gravity_animation(x,y,i));
       // console.log(anim_array);
     }
   }
-  else if(random_selection == 4){
-    console.log(anim_array);
-    anim_array.push(new lightning_animation(x,y));
-  }
 }
 
 function mouseClicked(){
-  add_anim(Math.floor(random(4,5)),mouseX,mouseY);
+  add_anim(Math.floor(random(1,4)),mouseX,mouseY);
 }
 
 // function mouseMoved(){
 //   add_anim(Math.floor(random(3,4)),mouseX,mouseY);
 // }
 
-// function mouseDragged(){
-//   add_anim(Math.floor(random(3,4)),mouseX,mouseY);
-// }
+function mouseDragged(){
+  add_anim(Math.floor(random(4,5)),mouseX,mouseY);
+}
 
 // function mouseMoved(){
 //   // console.log(Math.atan(radians((mouseX-ww/2)/(mouseY-wh/2))));
