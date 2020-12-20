@@ -56,7 +56,7 @@ function explosion_animation(x,y,count,level,val){
   this.pos = createVector(x,y);
   this.size = (level<=1) ? random(3,5) : 2;
   // this.speed = createVector(random(-2,2),random(-2,2));
-  this.speed = (level<=1) ? 4 : random(0,2);
+  this.speed = (level<=1) ? 4 : val;
   this.alpha = random(60,200);
   this.level = level;
   this.lifetime = explosion_lifetime;
@@ -71,7 +71,7 @@ explosion_animation.prototype = {
       this.alive = false;
       cnt = 10
       for(let i=0; i<=cnt; i++){
-        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1,cnt));
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1,random(0,2)));
       }
     }
     this.lifetime--;
@@ -179,6 +179,9 @@ humongous_animation.prototype = {
   update: function(){
     if (this.lifetime <= 0 ){
       this.alive = false;
+      for (let i=0; i< 10; i++){
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,0,2,4));
+      }
     }
     this.lifetime--;
     this.alpha = map(this.lifetime,30,humongous_lifetime,30,0);

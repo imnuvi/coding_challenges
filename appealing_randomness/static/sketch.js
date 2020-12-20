@@ -44,7 +44,7 @@ function add_anim(random_selection,x,y){
 }
 
 function mouseReleased(){
-  add_anim(Math.floor(random(3,4)),mouseX,mouseY);
+  add_anim(Math.floor(random(1,5)),mouseX,mouseY);
 }
 
 // function mouseMoved(){
