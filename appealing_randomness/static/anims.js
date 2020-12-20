@@ -91,11 +91,12 @@ function gravity_animation(x,y){
   this.pos = createVector(x,y);
   this.show_pos = this.pos.copy();
   this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + 20;
-  this.speed = 5;
+  this.speed = 4;
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;
   // this.lifetime = 200;
-  this.size = 10;
+  this.size = 2;
+  this.alpha = 200;
 }
 
 gravity_animation.prototype = {
@@ -115,6 +116,8 @@ gravity_animation.prototype = {
   },
 
   show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
     // circle(this.pos.x + this.show_pos.x ,this.pos.y + this.show_pos.y, this.size);
     circle(ww/2 + this.show_pos.x ,wh/2 + this.show_pos.y, this.size);
   }

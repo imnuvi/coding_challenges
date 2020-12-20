@@ -33,9 +33,14 @@ function add_anim(random_selection,x,y){
 }
 
 function mouseClicked(){
-  add_anim(Math.floor(random(3,4)),mouseX,mouseY);
+  add_anim(Math.floor(random(1,3)),mouseX,mouseY);
 }
-function mouseMoved(){
+
+// function mouseMoved(){
+//   add_anim(Math.floor(random(3,4)),mouseX,mouseY);
+// }
+
+function mouseDragged(){
   add_anim(Math.floor(random(3,4)),mouseX,mouseY);
 }
 
