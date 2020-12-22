@@ -56,8 +56,8 @@ function explosion_animation(x,y,count,level,val){
   this.pos = createVector(x,y);
   this.size = (level<=1) ? random(3,5) : 2;
   // this.speed = createVector(random(-2,2),random(-2,2));
-  this.speed = (level<=1) ? 4 : random(0,2);
-  this.alpha = random(60,150);
+  this.speed = (level<=1) ? 4 : val;
+  this.alpha = random(60,200);
   this.level = level;
   this.lifetime = explosion_lifetime;
 }
@@ -71,7 +71,7 @@ explosion_animation.prototype = {
       this.alive = false;
       cnt = 10
       for(let i=0; i<=cnt; i++){
-        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1,cnt));
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,i,this.level+1,random(0,2)));
       }
     }
     this.lifetime--;
@@ -86,16 +86,17 @@ explosion_animation.prototype = {
   }
 }
 
-function gravity_animation(x,y){
+function gravity_animation(x,y,i){
   this.alive = true;
+  this.id = i;
   this.pos = createVector(x,y);
   this.show_pos = this.pos.copy();
-  this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + 20;
+  this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + (20 * i);
   this.speed = 4;
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;
   // this.lifetime = 200;
-  this.size = 2;
+  this.size = map(this.id,0,8,1,2);
   this.alpha = 200;
 }
 
@@ -120,5 +121,83 @@ gravity_animation.prototype = {
     fill(accent_col);
     // circle(this.pos.x + this.show_pos.x ,this.pos.y + this.show_pos.y, this.size);
     circle(ww/2 + this.show_pos.x ,wh/2 + this.show_pos.y, this.size);
+  }
+}
+
+
+function lightning_animation(x,y,i){
+  this.alive = true;
+  this.id = i;
+  this.pos = createVector(x,y);
+  this.size = 1;
+  this.ang = random(0,360);
+  this.rad = Math.max(dist(this.pos.x,this.pos.y,0,0),dist(this.pos.x,this.pos.y,ww,wh),dist(this.pos.x,this.pos.y,0,wh),dist(this.pos.x,this.pos.y,ww,0));
+  this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
+  this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+  this.lifetime = lightning_lifetime;
+  this.alpha = 100;
+}
+
+lightning_animation.prototype = {
+  update: function(){
+    if (this.lifetime <= 0 ){
+      this.alive = false;
+    }
+    this.lifetime--;
+    // this.ang += 10;
+    // this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
+    // this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+
+    // this.size -= 2;
+  },
+
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    stroke(accent_col);
+    strokeWeight(this.size);
+    line(this.pos.x + this.point1.x, this.pos.y + this.point1.y,this.pos.x + this.point2.x, this.pos.y + this.point2.y);
+    noStroke();
+  }
+}
+
+function humongous_animation(x,y,i){
+  this.alive = true;
+  this.id = i;
+  this.pos = createVector(x,y);
+  this.size = 1;
+  this.ang = random(0,360);
+  // this.rad = Math.max(dist(this.pos.x,this.pos.y,0,0),dist(this.pos.x,this.pos.y,ww,wh),dist(this.pos.x,this.pos.y,0,wh),dist(this.pos.x,this.pos.y,ww,0)) * 2;
+  this.rad = dist(0,0,ww/2,wh/2);
+  this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
+  this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+  // this.lifetime = map(this.rad,dist(ww/2,wh/2,0,0),dist(0,0,ww,wh),30,humongous_lifetime);
+  this.lifetime = humongous_lifetime;
+  this.alpha = 10;
+}
+
+humongous_animation.prototype = {
+  update: function(){
+    if (this.lifetime <= 0 ){
+      this.alive = false;
+      for (let i=0; i< 10; i++){
+        anim_array.push(new explosion_animation(this.pos.x,this.pos.y,0,2,4));
+      }
+    }
+    this.lifetime--;
+    this.alpha = map(this.lifetime,30,humongous_lifetime,30,0);
+    this.rad -= 15;
+    // this.ang += 10;
+    // this.point1 = createVector(sin(this.ang)*this.rad,cos(this.ang)*this.rad);
+    // this.point2 = createVector(sin(this.ang + 180)*this.rad,cos(this.ang + 180)*this.rad);
+
+
+  },
+
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
+    // circle(this.pos.x,this.pos.y,dist(this.point1.x,this.point1.y,this.pos.x,this.pos.y));
+    // circle(this.pos.x,this.pos.y,dist(this.point1.x,this.point1.y,this.point2.x,this.point2.y));
+    circle(this.pos.x,this.pos.y,this.rad);
   }
 }
