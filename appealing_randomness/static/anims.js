@@ -201,3 +201,7 @@ humongous_animation.prototype = {
     circle(this.pos.x,this.pos.y,this.rad);
   }
 }
+
+function packer_animation(x,y){
+  this.pos = createVector(x,y);
+}
