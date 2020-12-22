@@ -36,15 +36,23 @@ function add_anim(random_selection,x,y){
   }
 
   else if(random_selection == 4){
+    anim_array.push(new packer_animation(x,y));
+  }
+
+  else if(random_selection == 5){
     for (let i=0; i<8; i++){
       anim_array.push(new gravity_animation(x,y,i));
       // console.log(anim_array);
     }
   }
+
+
 }
 
 function mouseReleased(){
-  add_anim(Math.floor(random(1,5)),mouseX,mouseY);
+  // add_anim(Math.floor(random(0,4)),mouseX,mouseY);
+  add_anim(4,mouseX,mouseY);    // tester
+  console.log(anim_array);
 }
 
 // function mouseMoved(){
@@ -52,7 +60,7 @@ function mouseReleased(){
 // }
 
 function mouseDragged(){
-  add_anim(Math.floor(random(4,5)),mouseX,mouseY);
+  add_anim(Math.floor(random(5,6)),mouseX,mouseY);
 }
 
 // function mouseMoved(){

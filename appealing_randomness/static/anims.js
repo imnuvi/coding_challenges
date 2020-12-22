@@ -203,16 +203,32 @@ humongous_animation.prototype = {
 }
 
 function packer_animation(x,y){
+  this.alive = true;
   this.pos = createVector(x,y);
   this.rad = 200;
+  this.alpha = 200;
+  this.lifetime = 200;
 }
 
 packer_animation.prototype = {
   update: function(){
 
+    if (this.lifetime <= 0){
+      this.alive = false;
+    }
+    this.lifetime --;
+    this.alpha--;
+
   },
-  
+
   show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
     circle(this.pos.x,this.pos.y,this.rad);
   }
+}
+
+
+function filled_circle(){
+  this.pos.x
 }
