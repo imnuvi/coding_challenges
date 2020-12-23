@@ -79,12 +79,12 @@ packer_animation.prototype = {
     ny = this.pos.y + (r * Math.sin(thet));
     // nx = random(ww);
     // ny = random(wh);
-    for (let i=0; i<this.poppers.length; i++){
-      curpop = this.poppers[i];
-      if (dist(curpop.pos.x,curpop.pos.y,nx,ny) < curpop.rad){
-        return;
-      }
-    }
+    // for (let i=0; i<this.poppers.length; i++){
+    //   curpop = this.poppers[i];
+    //   if (dist(curpop.pos.x,curpop.pos.y,nx,ny) < curpop.rad){
+    //     this.filler();
+    //   }
+    // }
 
     this.poppers.push(new filled_circle(nx,ny,this));
   },
@@ -119,18 +119,24 @@ function filled_circle(x,y,parent){
   this.alive = true;
   this.pos = createVector(x,y);
   this.growing = true;
-  this.dia = 0;
-  this.rad = 0;
+  this.dia = 10;
+  this.rad = 5;
 }
 
 filled_circle.prototype = {
   update: function(){
     // console.log(this.parent);
+    if (this.rad <= 0){
+      this.alive = false;
+      return;
+    }
     if (!this.growing){
+      this.dia -= 4;
+      this.rad = this.dia /2;
       return;
     }
     if (dist(this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y) + this.rad <= this.parent.rad/2){
-      this.dia++ ;
+      this.dia+= 4 ;
       this.rad = this.dia /2;
     }
     for (let i=0; i<this.parent.poppers.length; i++){
@@ -141,7 +147,8 @@ filled_circle.prototype = {
       }
       if (dist(this.pos.x,this.pos.y,curpop.pos.x,curpop.pos.y) < (curpop.rad/2+this.rad/2)){
         this.growing = false;
-        return;
+        this.dia -= 4;
+        this.rad = this.dia /2;
       }
     }
   },
