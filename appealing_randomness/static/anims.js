@@ -208,17 +208,15 @@ function packer_animation(x,y){
   this.rad = 200;
   this.alpha = 200;
   this.lifetime = 200;
-  this.poppers = this.filler();
+  this.poppers = [];
 }
 
 packer_animation.prototype = {
   filler: function(){
-    lst = [];
-    while(lst.length < 20){
-      x = random(ww);
-      y = random(wh);
-      lst.push(new fi)
-    }
+    nx = random(ww);
+    ny = random(wh);
+
+    lst.push(new filled_circle(nx,ny));
   },
 
   update: function(){
