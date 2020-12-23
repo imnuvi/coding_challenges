@@ -1,22 +1,25 @@
-function Bubble(start_x,start_y,depth,direction){
+function Bubble(start_x,start_y,depth,direction,grav){
   this.start = createVector(start_x,start_y);
   this.xpos = this.start.x;
   this.ypos = this.start.y;
   this.depth = depth;
   this.decval = wh/(this.ypos**(this.depth+1));
-  this.gravity_value = 0.98 / 1.5;
+
   this.std_velocity = (-1+Math.sqrt(1+(8*this.decval/this.gravity_value)))/2;
   this.max_limit = (wh)-(this.decval);
-  this.size = 10/(2**depth);
+  this.size = 8/(2**depth);
   this.radius = this.size/2;
-  this.y_velocity = -15 ;
+  this.y_velocity = random(0,-10) ;
   this.direction = direction;
   this.genesis = true;
 
-  this.bubble_speed = 6;
+  // this.gravity_value = ((random(-1,1)>0) ? 1 : -1 ) * (0.98 / 1.5);
+  this.grav = grav;
+  this.gravity_value = this.grav * (0.98 / 1.5);
+  this.bubble_speed = random(0,6);
   this.alive = true;
 
-  this.lifetime = 50;
+  this.lifetime = random(10,60);
 }
 
 Bubble.prototype.show = function(){
@@ -33,10 +36,10 @@ Bubble.prototype.collision = function(){
   }
   if (this.lifetime <= 0){
     this.alive = false;
-    anim_array.push(new Bubble(this.xpos,this.ypos,this.depth+1,1));
-    anim_array.push(new Bubble(this.xpos,this.ypos,this.depth+1,-1));
+    anim_array.push(new Bubble(this.xpos,this.ypos,this.depth+1,1,this.grav));
+    anim_array.push(new Bubble(this.xpos,this.ypos,this.depth+1,-1,this.grav));
   }
-  if ((this.ypos + this.radius) >= wh){
+  if (((this.ypos + this.radius) >= wh) || (this.ypos - this.radius) <= 0) {
 
     this.y_velocity = -this.y_velocity-this.gravity_value;
     // this.y_velocity = -this.std_velocity * this.gravity_value;

@@ -40,9 +40,10 @@ function add_anim(random_selection,x,y){
     anim_array.push(new packer_animation(x,y));
   }
   else if(random_selection == 5){
+    grav = ((random(-1,1)>0) ? 1 : -1 );
     for (let i = 0; i<5; i++){
-      anim_array.push(new Bubble(x,y,0,1));
-      anim_array.push(new Bubble(x,y,0,-1));
+      anim_array.push(new Bubble(x,y,0,1,((random(-1,1)>0) ? 1 : -1 )));
+      anim_array.push(new Bubble(x,y,0,-1,((random(-1,1)>0) ? 1 : -1 )));
     }
   }
 
@@ -67,7 +68,7 @@ function mouseReleased(){
 // }
 
 function mouseDragged(){
-  add_anim(Math.floor(random(5,6)),mouseX,mouseY);
+  add_anim(Math.floor(random(6,7)),mouseX,mouseY);
 }
 
 // function mouseMoved(){
