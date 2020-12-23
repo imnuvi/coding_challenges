@@ -311,7 +311,7 @@ filled_circle.prototype = {
       return;
     }
     this.rad++ ;
-    this.alpha--;
+    this.alpha-=4;
   },
 
   show: function(){
