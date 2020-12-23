@@ -68,11 +68,11 @@ function packer_animation(x,y){
 
 packer_animation.prototype = {
   filler: function(){
-    r = this.rad * random();
+    r = (this.rad/2) * random();
     thet = random() * 2 * PI;
 
-    nx = this.pos.x + r * Math.cos(thet);
-    ny = this.pos.y + r * Math.sin(thet);
+    nx = this.pos.x + (r * Math.cos(thet));
+    ny = this.pos.y + (r * Math.sin(thet));
     // nx = random(ww);
     // ny = random(wh);
 
@@ -81,7 +81,9 @@ packer_animation.prototype = {
 
   update: function(){
 
-    this.filler();
+    if (this.lifetime%4 == 0){
+      this.filler();
+    }
     if (this.lifetime <= 0){
       this.alive = false;
     }
