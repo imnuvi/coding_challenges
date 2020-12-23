@@ -133,14 +133,17 @@ filled_circle.prototype = {
       this.dia++ ;
       this.rad = this.dia /2;
     }
-    console.log(this.growing);
     for (let i=0; i<this.parent.poppers.length; i++){
       curpop = this.parent.poppers[i];
-      if (dist(this.pos.x,this.pos.y,curpop.pos.x,curpop.pos.y) < (popper.rad+this.rad)){
+      console.log(curpop);
+      if (curpop == this){
+        continue;
+      }
+      if (dist(this.pos.x,this.pos.y,curpop.pos.x,curpop.pos.y) < (curpop.rad/2+this.rad/2)){
         this.growing = false;
+        return;
       }
     }
-    console.log(this.growing);
   },
 
   show: function(){
