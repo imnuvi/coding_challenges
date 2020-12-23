@@ -267,7 +267,7 @@ packer_animation.prototype = {
     nx = random(ww);
     ny = random(wh);
 
-    if (this.poppers.length > 40){
+    if (this.poppers.length > 20){
       return;
     }
     this.poppers.push(new filled_circle(nx,ny));
@@ -299,11 +299,15 @@ packer_animation.prototype = {
 function filled_circle(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
+  this.maxrad = random(20,100);
   this.rad = 0;
 }
 
 filled_circle.prototype = {
   update: function(){
+    if (this.rad >= this.maxrad){
+      return;
+    }
     this.rad++ ;
   },
 
