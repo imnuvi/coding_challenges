@@ -5,16 +5,19 @@ function Bubble(start_x,start_y,depth,direction,grav){
   this.depth = depth;
   this.decval = wh/(this.ypos**(this.depth+1));
 
+  this.grav = grav;
   this.std_velocity = (-1+Math.sqrt(1+(8*this.decval/this.gravity_value)))/2;
   this.max_limit = (wh)-(this.decval);
-  this.size = 8/(2**depth);
+  this.size = 10/(2**depth);
   this.radius = this.size/2;
-  this.y_velocity = random(0,-10) ;
+  this.y_velocity = this.grav * random(0,-20) ;
   this.direction = direction;
+
   this.genesis = true;
 
   // this.gravity_value = ((random(-1,1)>0) ? 1 : -1 ) * (0.98 / 1.5);
-  this.grav = grav;
+
+  this.alpha = 150;
   this.gravity_value = this.grav * (0.98 / 1.5);
   this.bubble_speed = random(0,6);
   this.alive = true;
@@ -24,6 +27,8 @@ function Bubble(start_x,start_y,depth,direction,grav){
 
 Bubble.prototype.show = function(){
   this.genesis = false;
+  accent_col.setAlpha(this.alpha);
+  fill(accent_col);
   circle(this.xpos,this.ypos,this.size);
 }
 
@@ -51,6 +56,7 @@ Bubble.prototype.collision = function(){
 }
 
 Bubble.prototype.update = function(){
+  this.alpha -= 0.4;
   this.collision();
   this.gravity();
   this.move();
