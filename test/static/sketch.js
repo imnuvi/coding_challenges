@@ -76,6 +76,7 @@ packer_animation.prototype = {
 
   update: function(){
 
+    this.filler();
     if (this.lifetime <= 0){
       this.alive = false;
     }
@@ -87,9 +88,10 @@ packer_animation.prototype = {
   show: function(){
     accent_col.setAlpha(this.alpha);
     fill(accent_col);
-    // circle(this.pos.x,this.pos.y,this.rad);
+    circle(this.pos.x,this.pos.y,this.rad);
     for (let i=0; i<this.poppers.length; i++){
-      this.poppers[i]
+      this.poppers[i].update();
+      this.poppers[i].show();
     }
   }
 }
@@ -107,6 +109,8 @@ filled_circle.prototype = {
   },
 
   show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
     circle(this.pos.x,this.pos.y,this.rad);
   }
 }
