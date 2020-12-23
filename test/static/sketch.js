@@ -68,8 +68,13 @@ function packer_animation(x,y){
 
 packer_animation.prototype = {
   filler: function(){
-    nx = random(ww);
-    ny = random(wh);
+    r = this.rad * random();
+    thet = random() * 2 * PI;
+
+    nx = this.pos.x + r * Math.cos(thet);
+    ny = this.pos.y + r * Math.sin(thet);
+    // nx = random(ww);
+    // ny = random(wh);
 
     this.poppers.push(new filled_circle(nx,ny));
   },
