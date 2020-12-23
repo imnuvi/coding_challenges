@@ -15,6 +15,8 @@ function Bubble(start_x,start_y,depth,direction){
 
   this.bubble_speed = 6;
   this.alive = true;
+
+  this.lifetime = 50;
 }
 
 Bubble.prototype.show = function(){
@@ -26,6 +28,14 @@ Bubble.prototype.collision = function(){
   // if (this.genesis == false && this.ypos <= this.max_limit && this.y_velocity != 0){
   //   this.y_velocity = gravity_value;
   // }
+  if (this.depth > 3){
+    this.alive = false;
+  }
+  if (this.lifetime <= 0){
+    this.alive = false;
+    anim_array.push(new Bubble(this.xpos,this.ypos,this.depth+1,1));
+    anim_array.push(new Bubble(this.xpos,this.ypos,this.depth+1,-1));
+  }
   if ((this.ypos + this.radius) >= wh){
 
     this.y_velocity = -this.y_velocity-this.gravity_value;
@@ -34,6 +44,7 @@ Bubble.prototype.collision = function(){
   if ((this.xpos + this.radius) >= ww  || (this.xpos - this.radius) <= 0){
     this.direction *= -1;
   }
+  this.lifetime--;
 }
 
 Bubble.prototype.update = function(){

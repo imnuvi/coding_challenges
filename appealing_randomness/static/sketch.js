@@ -40,8 +40,10 @@ function add_anim(random_selection,x,y){
     anim_array.push(new packer_animation(x,y));
   }
   else if(random_selection == 5){
-
-    anim_array.push(new Bubble(x,y,0,1));
+    for (let i = 0; i<5; i++){
+      anim_array.push(new Bubble(x,y,0,1));
+      anim_array.push(new Bubble(x,y,0,-1));
+    }
   }
 
   else if(random_selection == 6){
