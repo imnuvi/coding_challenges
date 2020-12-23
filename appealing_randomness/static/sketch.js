@@ -37,7 +37,7 @@ function add_anim(random_selection,x,y){
 
   else if(random_selection == 4){
     // anim_array.push(new packer_animation(x,y));
-    anim_array.push(new filled_circle(x,y));
+    anim_array.push(new packer_animation(x,y));
   }
 
   else if(random_selection == 5){
