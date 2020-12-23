@@ -208,9 +208,19 @@ function packer_animation(x,y){
   this.rad = 200;
   this.alpha = 200;
   this.lifetime = 200;
+  this.poppers = this.filler();
 }
 
 packer_animation.prototype = {
+  filler: function(){
+    lst = [];
+    while(lst.length < 20){
+      x = random(ww);
+      y = random(wh);
+      lst.push(new fi)
+    }
+  },
+
   update: function(){
 
     if (this.lifetime <= 0){
@@ -229,6 +239,18 @@ packer_animation.prototype = {
 }
 
 
-function filled_circle(){
-  this.pos.x
+function filled_circle(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.rad = 0;
+}
+
+filled_circle.prototype = {
+  update: function(){
+    this.rad++ ;
+  },
+
+  show: function(){
+    circle(this.pos.x,this.pos.y,this.rad);
+  }
 }
