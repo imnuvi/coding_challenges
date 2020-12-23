@@ -201,3 +201,119 @@ humongous_animation.prototype = {
     circle(this.pos.x,this.pos.y,this.rad);
   }
 }
+
+// function packer_animation(x,y){
+//   this.alive = true;
+//   this.pos = createVector(x,y);
+//   this.rad = 200;
+//   this.alpha = 200;
+//   this.lifetime = 200;
+//   this.poppers = [];
+// }
+//
+// packer_animation.prototype = {
+//   filler: function(){
+//     nx = random(ww);
+//     ny = random(wh);
+//
+//     lst.push(new filled_circle(nx,ny));
+//   },
+//
+//   update: function(){
+//
+//     if (this.lifetime <= 0){
+//       this.alive = false;
+//     }
+//     this.lifetime --;
+//     this.alpha--;
+//
+//   },
+//
+//   show: function(){
+//     accent_col.setAlpha(this.alpha);
+//     fill(accent_col);
+//     circle(this.pos.x,this.pos.y,this.rad);
+//   }
+// }
+//
+//
+// function filled_circle(x,y){
+//   this.alive = true;
+//   this.pos = createVector(x,y);
+//   this.rad = 0;
+// }
+//
+// filled_circle.prototype = {
+//   update: function(){
+//     this.rad++ ;
+//   },
+//
+//   show: function(){
+//     circle(this.pos.x,this.pos.y,this.rad);
+//   }
+// }
+
+function packer_animation(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.rad = 200;
+  this.alpha = 200;
+  this.lifetime = 200;
+  this.poppers = [];
+}
+
+packer_animation.prototype = {
+  filler: function(){
+    nx = random(ww);
+    ny = random(wh);
+
+    if (this.poppers.length > 20){
+      return;
+    }
+    this.poppers.push(new filled_circle(nx,ny));
+  },
+
+  update: function(){
+
+    this.filler();
+    if (this.lifetime <= 0){
+      this.alive = false;
+    }
+    this.lifetime --;
+    this.alpha--;
+
+  },
+
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
+    circle(this.pos.x,this.pos.y,this.rad);
+    for (let i=0; i<this.poppers.length; i++){
+      this.poppers[i].update();
+      this.poppers[i].show();
+    }
+  }
+}
+
+
+function filled_circle(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.maxrad = random(20,100);
+  this.rad = 0;
+}
+
+filled_circle.prototype = {
+  update: function(){
+    if (this.rad >= this.maxrad){
+      return;
+    }
+    this.rad++ ;
+  },
+
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
+    circle(this.pos.x,this.pos.y,this.rad);
+  }
+}
