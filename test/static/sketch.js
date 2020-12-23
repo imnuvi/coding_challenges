@@ -68,6 +68,10 @@ function packer_animation(x,y){
 
 packer_animation.prototype = {
   filler: function(){
+    if (this.poppers.length > 10){
+      return;
+    }
+
     r = (this.rad/2) * random();
     thet = random() * 2 * PI;
 
@@ -75,8 +79,9 @@ packer_animation.prototype = {
     ny = this.pos.y + (r * Math.sin(thet));
     // nx = random(ww);
     // ny = random(wh);
+    // for (let i=0; i<this.poppers.length)
 
-    this.poppers.push(new filled_circle(nx,ny));
+    this.poppers.push(new filled_circle(nx,ny,this));
   },
 
   update: function(){
@@ -104,15 +109,22 @@ packer_animation.prototype = {
 }
 
 
-function filled_circle(x,y){
+function filled_circle(x,y,parent){
+  this.parent = parent;
   this.alive = true;
   this.pos = createVector(x,y);
+  this.dia = 0;
   this.rad = 0;
 }
 
 filled_circle.prototype = {
   update: function(){
-    this.rad++ ;
+    console.log(this.parent);
+    if (dist(this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y) + this.rad <= this.parent.rad/2){
+      this.dia++ ;
+      this.rad = this.dia /2;
+    }
+
   },
 
   show: function(){
