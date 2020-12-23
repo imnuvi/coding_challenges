@@ -301,6 +301,7 @@ function filled_circle(x,y){
   this.pos = createVector(x,y);
   this.maxrad = random(2,10);
   this.rad = 0;
+  this.alpha = 100;
 }
 
 filled_circle.prototype = {
@@ -309,6 +310,7 @@ filled_circle.prototype = {
       return;
     }
     this.rad++ ;
+    this.alpha--;
   },
 
   show: function(){
