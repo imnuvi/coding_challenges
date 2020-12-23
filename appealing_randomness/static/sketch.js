@@ -58,8 +58,8 @@ function add_anim(random_selection,x,y){
 }
 
 function mouseReleased(){
-  // add_anim(Math.floor(random(0,4)),mouseX,mouseY);
-  add_anim(5,mouseX,mouseY);    // tester
+  add_anim(Math.floor(random(0,6)),mouseX,mouseY);
+  // add_anim(5,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 

@@ -258,7 +258,7 @@ function packer_animation(x,y){
   this.pos = createVector(x,y);
   this.rad = 200;
   this.alpha = 200;
-  this.lifetime = 200;
+  this.lifetime = 100;
   this.poppers = [];
 }
 
@@ -287,7 +287,7 @@ packer_animation.prototype = {
   show: function(){
     accent_col.setAlpha(this.alpha);
     fill(accent_col);
-    circle(this.pos.x,this.pos.y,this.rad);
+    // circle(this.pos.x,this.pos.y,this.rad);
     for (let i=0; i<this.poppers.length; i++){
       this.poppers[i].update();
       this.poppers[i].show();
@@ -299,7 +299,7 @@ packer_animation.prototype = {
 function filled_circle(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.maxrad = random(20,100);
+  this.maxrad = random(2,10);
   this.rad = 0;
 }
 

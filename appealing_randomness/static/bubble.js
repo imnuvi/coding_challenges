@@ -19,7 +19,7 @@ function Bubble(start_x,start_y,depth,direction,grav){
 
   this.alpha = 150;
   this.gravity_value = this.grav * (0.98 / 1.5);
-  this.bubble_speed = random(0,6);
+  this.bubble_speed = random(0,10);
   this.alive = true;
 
   this.lifetime = random(10,60);
