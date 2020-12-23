@@ -1,4 +1,5 @@
-
+let anims_list = [];
+let accent_col;
 function random_color(){
   thecol = color(random(0,255),random(0,255),random(0,255));
   return thecol;
@@ -17,6 +18,9 @@ function reportsize(){
 
 window.addEventListener('resize', reportsize);
 
+function mousePressed(){
+  anims_list.push(new packer_animation(mouseX,mouseY));
+}
 
 function init(){
   ww = windowWidth;
@@ -24,13 +28,85 @@ function init(){
   canvas = createCanvas(ww,wh);
   canvas.style('z-index','-1');
   canvas.position(0,0);
+  accent_col = color(255,255,255);
 }
 
 function setup(){
+  noStroke();
   pixelDensity(2);
   init();
 }
 
 function draw(){
-  circle(mouseX,mouseY,100);
+  background(0);
+  // circle(mouseX,mouseY,100);
+  for (let i=0; i<anims_list.length; i++){
+    // fill(random_color());
+    anim = anims_list[i];
+    if (anim.alive){
+      push()
+        anim.update();
+        anim.show();
+      pop();
+    }
+    else{
+      anims_list.splice(i--,1);
+    }
+  }
+}
+
+
+
+function packer_animation(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.rad = 200;
+  this.alpha = 200;
+  this.lifetime = 200;
+  this.poppers = [];
+}
+
+packer_animation.prototype = {
+  filler: function(){
+    nx = random(ww);
+    ny = random(wh);
+
+    this.poppers.push(new filled_circle(nx,ny));
+  },
+
+  update: function(){
+
+    if (this.lifetime <= 0){
+      this.alive = false;
+    }
+    this.lifetime --;
+    this.alpha--;
+
+  },
+
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
+    // circle(this.pos.x,this.pos.y,this.rad);
+    for (let i=0; i<this.poppers.length; i++){
+      this.poppers[i]
+    }
+  }
+}
+
+
+function filled_circle(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.rad = 0;
+}
+
+filled_circle.prototype = {
+  update: function(){
+    this.rad++ ;
+  },
+
+  show: function(){
+    circle(this.pos.x,this.pos.y,this.rad);
+  }
 }
