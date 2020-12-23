@@ -89,7 +89,8 @@ explosion_animation.prototype = {
 function gravity_animation(x,y,i){
   this.alive = true;
   this.id = i;
-  this.pos = createVector(x,y);
+  this.pos = createVector(x*2.5,y*2.5);
+  // this.pos = createVector(ww/2,wh/2);
   this.show_pos = this.pos.copy();
   this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + (20 * i);
   this.speed = 4;
