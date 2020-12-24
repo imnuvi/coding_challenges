@@ -109,7 +109,7 @@ function init(){
   canvas.style('z-index','-1');
   canvas.position(0,0);
 
-  set_color(0,0,0);
+  set_color(50,50,50);
 }
 
 
