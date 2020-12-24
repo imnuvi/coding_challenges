@@ -300,7 +300,7 @@ packer_animation.prototype = {
 function filled_circle(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.maxrad = random(2,10);
+  this.maxrad = random(22,100);
   this.rad = 0;
   this.alpha = 100;
 }
