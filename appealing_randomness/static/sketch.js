@@ -8,6 +8,7 @@ let humongous_lifetime = 60;
 let accent_col;
 let bg_col;
 
+let bright = true;
 
 function random_color(){
   thecol = color(random(0,255),random(0,255),random(0,255));
@@ -15,6 +16,7 @@ function random_color(){
 }
 
 function add_anim(random_selection,x,y){
+
   if (random_selection == 1){
     rad = random(30,100);
     for (let i=0; i<3; i++){
@@ -56,9 +58,16 @@ function add_anim(random_selection,x,y){
   }
 
 
+
 }
 
 function mouseReleased(){
+  cur_rand = ((random() > 0.95) ? 1 : 0);
+  // cur_rand = 1;
+
+  if (cur_rand){
+    anim_array.push(new thunder_animation());
+  }
   add_anim(Math.floor(random(0,6)),mouseX,mouseY);
   // add_anim(5,mouseX,mouseY);    // tester
   console.log(anim_array);
@@ -82,6 +91,12 @@ function mouseDragged(){
 // }
 
 function set_color(x,y,val){
+  if (bright){
+    bright = false;
+  }
+  else{
+    bright = true;
+  }
   bg_col = (255-x,255-y, 255-val)
   accent_col = color(x,y,val);
 }
@@ -96,6 +111,7 @@ function init(){
 
   set_color(0,0,0);
 }
+
 
 function setup(){
   angleMode(DEGREES);

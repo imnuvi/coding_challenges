@@ -7,7 +7,7 @@ function power_animation(x,y,i,dir,rad){
   this.dir = dir;
   // this.val = random(0.4,1.4);
   this.ang = map(i, 0, 5, 0, 360);
-  this.size = 2.5;
+  this.size = 5;
   this.rad = rad;
   this.lifetime = power_lifetime;
   this.alpha = random(60,150);
@@ -318,5 +318,44 @@ filled_circle.prototype = {
     accent_col.setAlpha(this.alpha);
     fill(accent_col);
     circle(this.pos.x,this.pos.y,this.rad);
+  }
+}
+
+
+function thunder_animation(){
+  this.alive = true;
+  this.lifetime = 20;
+  // this.state  = ((random(-1,1) > 0) ? true : false);
+  this.state = bright;
+  this.bright = this.state;
+  this.mult = 5;
+}
+
+thunder_animation.prototype = {
+  update: function(){
+    this.lifetime--;
+    if (this.lifetime <= 0){
+      this.alive = false;
+      this.show();
+    }
+    if (this.lifetime%this.mult == 0){
+      this.bright = (this.state);
+    }
+    else{
+      this.bright = (!this.state);
+    }
+
+    if (this.lifetime%3 == 0){
+      this.mult--;
+    }
+  },
+
+  show: function(){
+    if (this.bright){
+      set_color(50,50,50);
+    }
+    else{
+      set_color(255,255,255);
+    }
   }
 }
