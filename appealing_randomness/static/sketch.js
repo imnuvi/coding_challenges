@@ -40,7 +40,7 @@ function add_anim(random_selection,x,y){
 
   else if(random_selection == 4){
     // anim_array.push(new packer_animation(x,y));
-    anim_array.push(new packer_animation(x,y));
+    anim_array.push(new packer_animation(x,y,30));
   }
   else if(random_selection == 5){
     grav = ((random(-1,1)>0) ? 1 : -1 );
@@ -68,8 +68,8 @@ function mouseReleased(){
   if (cur_rand){
     anim_array.push(new thunder_animation());
   }
-  add_anim(Math.floor(random(0,6)),mouseX,mouseY);
-  // add_anim(5,mouseX,mouseY);    // tester
+  add_anim(Math.floor(random(1,6)),mouseX,mouseY);
+  // add_anim(4,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 

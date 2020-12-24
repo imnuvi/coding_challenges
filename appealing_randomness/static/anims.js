@@ -254,13 +254,14 @@ humongous_animation.prototype = {
 //   }
 // }
 
-function packer_animation(x,y){
+function packer_animation(x,y,cnt){
   this.alive = true;
   this.pos = createVector(x,y);
   this.rad = 200;
   this.alpha = 200;
   this.lifetime = 100;
   this.poppers = [];
+  this.cnt = cnt;
 }
 
 packer_animation.prototype = {
@@ -268,7 +269,7 @@ packer_animation.prototype = {
     nx = random(ww);
     ny = random(wh);
 
-    if (this.poppers.length > 20){
+    if (this.poppers.length > this.cnt){
       return;
     }
     this.poppers.push(new filled_circle(nx,ny));
