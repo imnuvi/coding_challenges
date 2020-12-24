@@ -1,11 +1,12 @@
 let anim_array = [];
 
 let power_lifetime = 80;
-let explosion_lifetime = 20;
+let explosion_lifetime = 30;
 let lightning_lifetime = 5;
 let humongous_lifetime = 60;
 
 let accent_col;
+let bg_col;
 
 
 function random_color(){
@@ -48,7 +49,7 @@ function add_anim(random_selection,x,y){
   }
 
   else if(random_selection == 6){
-    for (let i=0; i<8; i++){
+    for (let i=0; i<3; i++){
       anim_array.push(new gravity_animation(x,y,i));
       // console.log(anim_array);
     }
@@ -80,8 +81,9 @@ function mouseDragged(){
 //   pop();
 // }
 
-function set_color(x,y){
-  accent_col = color(x,y,255);
+function set_color(x,y,val){
+  bg_col = (255-x,255-y, 255-val)
+  accent_col = color(x,y,val);
 }
 function init(){
   pixelDensity(2);
@@ -92,7 +94,7 @@ function init(){
   canvas.style('z-index','-1');
   canvas.position(0,0);
 
-  set_color(255,255);
+  set_color(0,0,0);
 }
 
 function setup(){
@@ -102,7 +104,7 @@ function setup(){
 
 function draw(){
 
-  background(0);
+  background(bg_col);
   for (let i=0; i<anim_array.length; i++){
     // fill(random_color());
     anim = anim_array[i];

@@ -97,7 +97,7 @@ function gravity_animation(x,y,i){
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;
   // this.lifetime = 200;
-  this.size = map(this.id,0,8,1,2);
+  this.size = map(this.id,0,8,1,10);
   this.alpha = 200;
 }
 
