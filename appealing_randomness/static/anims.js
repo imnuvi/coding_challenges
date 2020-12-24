@@ -7,7 +7,7 @@ function power_animation(x,y,i,dir,rad){
   this.dir = dir;
   // this.val = random(0.4,1.4);
   this.ang = map(i, 0, 5, 0, 360);
-  this.size = 2.5;
+  this.size = 5;
   this.rad = rad;
   this.lifetime = power_lifetime;
   this.alpha = random(60,150);
@@ -89,14 +89,15 @@ explosion_animation.prototype = {
 function gravity_animation(x,y,i){
   this.alive = true;
   this.id = i;
-  this.pos = createVector(x,y);
+  this.pos = createVector(x*2.5,y*2.5);
+  // this.pos = createVector(ww/2,wh/2);
   this.show_pos = this.pos.copy();
   this.ang = createVector(ww/2,wh/2).angleBetween(createVector(this.pos.x-ww/2,this.pos.y-wh/2)) + 360 + (20 * i);
   this.speed = 4;
   this.rad = dist(ww/2, wh/2, this.pos.x, this.pos.y);
   this.lifetime = this.speed * this.rad;
   // this.lifetime = 200;
-  this.size = map(this.id,0,8,1,2);
+  this.size = map(this.id,0,8,1,10);
   this.alpha = 200;
 }
 
@@ -258,7 +259,7 @@ function packer_animation(x,y){
   this.pos = createVector(x,y);
   this.rad = 200;
   this.alpha = 200;
-  this.lifetime = 200;
+  this.lifetime = 100;
   this.poppers = [];
 }
 
@@ -287,7 +288,7 @@ packer_animation.prototype = {
   show: function(){
     accent_col.setAlpha(this.alpha);
     fill(accent_col);
-    circle(this.pos.x,this.pos.y,this.rad);
+    // circle(this.pos.x,this.pos.y,this.rad);
     for (let i=0; i<this.poppers.length; i++){
       this.poppers[i].update();
       this.poppers[i].show();
@@ -299,8 +300,9 @@ packer_animation.prototype = {
 function filled_circle(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.maxrad = random(20,100);
+  this.maxrad = random(22,100);
   this.rad = 0;
+  this.alpha = 100;
 }
 
 filled_circle.prototype = {
@@ -309,11 +311,51 @@ filled_circle.prototype = {
       return;
     }
     this.rad++ ;
+    this.alpha-=4;
   },
 
   show: function(){
     accent_col.setAlpha(this.alpha);
     fill(accent_col);
     circle(this.pos.x,this.pos.y,this.rad);
+  }
+}
+
+
+function thunder_animation(){
+  this.alive = true;
+  this.lifetime = 20;
+  // this.state  = ((random(-1,1) > 0) ? true : false);
+  this.state = bright;
+  this.bright = this.state;
+  this.mult = 5;
+}
+
+thunder_animation.prototype = {
+  update: function(){
+    this.lifetime--;
+    if (this.lifetime <= 0){
+      this.alive = false;
+      this.show();
+    }
+    if (this.lifetime%this.mult == 0){
+      this.bright = (this.state);
+    }
+    else{
+      this.bright = (!this.state);
+    }
+
+    if (this.lifetime%3 == 0){
+      this.mult--;
+    }
+  },
+
+  show: function(){
+    if (this.bright){
+      set_color(50,50,50);
+    }
+    else{
+      set_color(255,255,255);
+    }
   }
 }

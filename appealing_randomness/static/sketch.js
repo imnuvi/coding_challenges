@@ -1,12 +1,14 @@
 let anim_array = [];
 
 let power_lifetime = 80;
-let explosion_lifetime = 20;
+let explosion_lifetime = 30;
 let lightning_lifetime = 5;
 let humongous_lifetime = 60;
 
 let accent_col;
+let bg_col;
 
+let bright = true;
 
 function random_color(){
   thecol = color(random(0,255),random(0,255),random(0,255));
@@ -14,6 +16,7 @@ function random_color(){
 }
 
 function add_anim(random_selection,x,y){
+
   if (random_selection == 1){
     rad = random(30,100);
     for (let i=0; i<3; i++){
@@ -40,32 +43,43 @@ function add_anim(random_selection,x,y){
     anim_array.push(new packer_animation(x,y));
   }
   else if(random_selection == 5){
-
-    anim_array.push(new Bubble(x,y,0,1));
+    grav = ((random(-1,1)>0) ? 1 : -1 );
+    for (let i = 0; i<3; i++){
+      anim_array.push(new Bubble(x,y,0,1,((random(-1,1)>0) ? 1 : -1 )));
+      anim_array.push(new Bubble(x,y,0,-1,((random(-1,1)>0) ? 1 : -1 )));
+    }
   }
 
   else if(random_selection == 6){
-    for (let i=0; i<8; i++){
+    for (let i=0; i<3; i++){
       anim_array.push(new gravity_animation(x,y,i));
       // console.log(anim_array);
     }
   }
 
 
+
 }
 
 function mouseReleased(){
-  // add_anim(Math.floor(random(0,4)),mouseX,mouseY);
-  add_anim(5,mouseX,mouseY);    // tester
+  cur_rand = ((random() > 0.95) ? 1 : 0);
+  // cur_rand = 1;
+
+  if (cur_rand){
+    anim_array.push(new thunder_animation());
+  }
+  add_anim(Math.floor(random(0,6)),mouseX,mouseY);
+  // add_anim(5,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 
 // function mouseMoved(){
-//   add_anim(Math.floor(random(3,4)),mouseX,mouseY);
+//   add_anim(1,mouseX,mouseY);
+//   // add_anim(Math.floor(random(0,7)),mouseX,mouseY);
 // }
 
 function mouseDragged(){
-  add_anim(Math.floor(random(5,6)),mouseX,mouseY);
+  add_anim(Math.floor(random(6,7)),mouseX,mouseY);
 }
 
 // function mouseMoved(){
@@ -76,8 +90,15 @@ function mouseDragged(){
 //   pop();
 // }
 
-function set_color(x,y){
-  accent_col = color(x,y,255);
+function set_color(x,y,val){
+  if (bright){
+    bright = false;
+  }
+  else{
+    bright = true;
+  }
+  bg_col = (255-x,255-y, 255-val)
+  accent_col = color(x,y,val);
 }
 function init(){
   pixelDensity(2);
@@ -88,8 +109,9 @@ function init(){
   canvas.style('z-index','-1');
   canvas.position(0,0);
 
-  set_color(255,255);
+  set_color(0,0,0);
 }
+
 
 function setup(){
   angleMode(DEGREES);
@@ -98,7 +120,7 @@ function setup(){
 
 function draw(){
 
-  background(0);
+  background(bg_col);
   for (let i=0; i<anim_array.length; i++){
     // fill(random_color());
     anim = anim_array[i];
