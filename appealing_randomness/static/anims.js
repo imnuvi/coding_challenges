@@ -367,16 +367,26 @@ function collator_animation(x,y){
   this.pos = createVector(x,y);
   this.alpha = 100;
   this.lifetime = collator_lifetime;
-  this.children = [new attracted(ww,0,this)];
+  this.children = [new attracted(ww,0,this),
+    new attracted(0,wh,this),
+    new attracted(ww,wh,this),
+    new attracted(0,0,this),];
+    // new attracted(ww/2,0,this),
+    // new attracted(0,wh/2,this),
+    // new attracted(ww/2,wh,this),
+    // new attracted(ww,wh/2,this),];
 }
 
 collator_animation.prototype = {
   update: function(){
+    if (this.lifetime <= 0){
+      this.alive = false;
+    }
     for (let i=0; i<this.children.length; i++){
       this.children[i].update();
     }
-    // this.lifetime--;
-    // this.alpha--;
+    this.lifetime--;
+    this.alpha--;
   },
   show: function(){
     accent_col.setAlpha(this.alpha);
@@ -393,21 +403,16 @@ function attracted(x,y,parent){
   this.alive = true;
   this.pos = createVector(x,y);
   this.parent = parent;
-  this.max_lifetime = collator_lifetime;
   this.lifetime = collator_lifetime;
   this.size = 20;
 
-  // this.step = dist(this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y) / (this.lifetime*10);
-  this.step = 0.01;
   this.amount = 0;
   this.curpos = this.pos.copy();
 }
 
 attracted.prototype = {
   update: function(){
-    console.log((this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y));
-    console.log(this.step);
-    this.amount = this.step * (this.max_lifetime-this.lifetime);
+    this.amount = map(this.lifetime,collator_lifetime,0,0,1);
     this.curpos = p5.Vector.lerp(this.pos,this.parent.pos,this.amount);
     console.log(this.curpos);
     this.lifetime --;

@@ -77,10 +77,10 @@ function mouseReleased(){
   console.log(anim_array);
 }
 
-// function mouseMoved(){
-//   add_anim(1,mouseX,mouseY);
-//   // add_anim(Math.floor(random(0,7)),mouseX,mouseY);
-// }
+function mouseMoved(){
+  add_anim(6,mouseX,mouseY);
+  // add_anim(Math.floor(random(0,7)),mouseX,mouseY);
+}
 
 function mouseDragged(){
   add_anim(Math.floor(random(7,8)),mouseX,mouseY);
