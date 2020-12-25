@@ -49,8 +49,11 @@ function add_anim(random_selection,x,y){
       anim_array.push(new Bubble(x,y,0,-1,((random(-1,1)>0) ? 1 : -1 )));
     }
   }
-
   else if(random_selection == 6){
+    anim_array.push(new collator_animation(x,y));
+  }
+
+  else if(random_selection == 7){
     for (let i=0; i<3; i++){
       anim_array.push(new gravity_animation(x,y,i));
       // console.log(anim_array);
@@ -68,8 +71,8 @@ function mouseReleased(){
   if (cur_rand){
     anim_array.push(new thunder_animation());
   }
-  add_anim(Math.floor(random(1,6)),mouseX,mouseY);
-  // add_anim(4,mouseX,mouseY);    // tester
+  // add_anim(Math.floor(random(1,6)),mouseX,mouseY);
+  add_anim(6,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 
@@ -79,7 +82,7 @@ function mouseReleased(){
 // }
 
 function mouseDragged(){
-  add_anim(Math.floor(random(6,7)),mouseX,mouseY);
+  add_anim(Math.floor(random(7,8)),mouseX,mouseY);
 }
 
 // function mouseMoved(){

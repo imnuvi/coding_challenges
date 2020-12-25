@@ -360,3 +360,55 @@ thunder_animation.prototype = {
     }
   }
 }
+
+
+function collator_animation(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.alpha = 100;
+  this.lifetime = 200;
+  this.children = [new attracted(ww/2,wh/2,this)];
+}
+
+collator_animation.prototype = {
+  update: function(){
+    for (let i=0; i<this.children.length; i++){
+      this.children[i].update();
+    }
+    // this.lifetime--;
+    // this.alpha--;
+  },
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
+    circle(this.pos.x,this.pos.y,100);
+    for (let i=0; i<this.children.length; i++){
+      this.children[i].show();
+    }
+  }
+
+}
+
+function attracted(x,y,parent){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.lifetime = 100;
+  this.parent = parent;
+  this.size = 20;
+
+  this.step = dist(this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y) / this.lifetime;
+  this.amount = 0;
+  this.curpos = this.pos.copy();
+}
+
+attracted.prototype = {
+  update: function(){
+    this.amount += this.step;
+    this.curpos = p5.Vector.lerp(this.parent.pos,this.pos,0.5);
+    console.log(this.curpos);
+  },
+
+  show: function(){
+    circle(this.curpos.x,this.curpos.y,this.size);
+  }
+}
