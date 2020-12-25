@@ -366,8 +366,8 @@ function collator_animation(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
   this.alpha = 100;
-  this.lifetime = 200;
-  this.children = [new attracted(ww/2,wh/2,this)];
+  this.lifetime = collator_lifetime;
+  this.children = [new attracted(ww,0,this)];
 }
 
 collator_animation.prototype = {
@@ -392,20 +392,25 @@ collator_animation.prototype = {
 function attracted(x,y,parent){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.lifetime = 100;
   this.parent = parent;
+  this.max_lifetime = collator_lifetime;
+  this.lifetime = collator_lifetime;
   this.size = 20;
 
-  this.step = dist(this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y) / this.lifetime;
+  // this.step = dist(this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y) / (this.lifetime*10);
+  this.step = 0.01;
   this.amount = 0;
   this.curpos = this.pos.copy();
 }
 
 attracted.prototype = {
   update: function(){
-    this.amount += this.step;
-    this.curpos = p5.Vector.lerp(this.parent.pos,this.pos,0.5);
+    console.log((this.parent.pos.x,this.parent.pos.y,this.pos.x,this.pos.y));
+    console.log(this.step);
+    this.amount = this.step * (this.max_lifetime-this.lifetime);
+    this.curpos = p5.Vector.lerp(this.pos,this.parent.pos,this.amount);
     console.log(this.curpos);
+    this.lifetime --;
   },
 
   show: function(){
