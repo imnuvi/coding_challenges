@@ -365,16 +365,16 @@ thunder_animation.prototype = {
 function collator_animation(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.alpha = 100;
+  this.alpha = collator_lifetime;
   this.lifetime = collator_lifetime;
   this.children = [new attracted(ww,0,this),
     new attracted(0,wh,this),
     new attracted(ww,wh,this),
-    new attracted(0,0,this),];
-    // new attracted(ww/2,0,this),
-    // new attracted(0,wh/2,this),
-    // new attracted(ww/2,wh,this),
-    // new attracted(ww,wh/2,this),];
+    new attracted(0,0,this),
+    new attracted(ww/2,0,this),
+    new attracted(0,wh/2,this),
+    new attracted(ww/2,wh,this),
+    new attracted(ww,wh/2,this),];
 }
 
 collator_animation.prototype = {
