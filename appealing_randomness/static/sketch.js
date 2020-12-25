@@ -4,7 +4,7 @@ let power_lifetime = 80;
 let explosion_lifetime = 30;
 let lightning_lifetime = 5;
 let humongous_lifetime = 60;
-let collator_lifetime = 200;
+let collator_lifetime = 30;
 
 let accent_col;
 let bg_col;

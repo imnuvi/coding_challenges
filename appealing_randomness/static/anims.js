@@ -365,25 +365,16 @@ thunder_animation.prototype = {
 function collator_animation(x,y){
   this.alive = true;
   this.pos = createVector(x,y);
-  this.alpha = collator_lifetime;
-  this.lifetime = collator_lifetime;
-//   this.children = [new attracted(ww,0,this),
-//     new attracted(0,wh,this),
-//     new attracted(ww,wh,this),
-//     new attracted(0,0,this),
-//     new attracted(ww/2,0,this),
-//     new attracted(0,wh/2,this),
-//     new attracted(ww/2,wh,this),
-//     new attracted(ww,wh/2,this),];
-// }
 
+  this.lifetime = collator_lifetime;
+  this.alpha = map(this.lifetime,0,collator_lifetime,0,100);
   this.children = this.fill();
 }
 
 collator_animation.prototype = {
   fill: function(){
     arr = [];
-    val = random(0,360);
+    val = random(0,90);
     for (let i = 0; i<=10; i++){
       ang = map(i,0,10,0,360) + val;
       // ang = 90;
@@ -405,7 +396,7 @@ collator_animation.prototype = {
   show: function(){
     accent_col.setAlpha(this.alpha);
     fill(accent_col);
-    circle(this.pos.x,this.pos.y,100);
+    // circle(this.pos.x,this.pos.y,100);
     for (let i=0; i<this.children.length; i++){
       this.children[i].show();
     }
