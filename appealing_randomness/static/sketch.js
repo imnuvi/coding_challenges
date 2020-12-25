@@ -8,6 +8,7 @@ let collator_lifetime = 200;
 
 let accent_col;
 let bg_col;
+let raddist;
 
 let bright = true;
 
@@ -77,10 +78,10 @@ function mouseReleased(){
   console.log(anim_array);
 }
 
-function mouseMoved(){
-  add_anim(6,mouseX,mouseY);
-  // add_anim(Math.floor(random(0,7)),mouseX,mouseY);
-}
+// function mouseMoved(){
+//   add_anim(6,mouseX,mouseY);
+//   // add_anim(Math.floor(random(0,7)),mouseX,mouseY);
+// }
 
 function mouseDragged(){
   add_anim(Math.floor(random(7,8)),mouseX,mouseY);
@@ -109,6 +110,7 @@ function init(){
   noStroke();
   ww = windowWidth;
   wh = windowHeight;
+  raddist = dist(ww/2,wh/2,0,0);
   canvas = createCanvas(ww,wh);
   canvas.style('z-index','-1');
   canvas.position(0,0);

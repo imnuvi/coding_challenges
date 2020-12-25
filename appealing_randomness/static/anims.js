@@ -367,17 +367,31 @@ function collator_animation(x,y){
   this.pos = createVector(x,y);
   this.alpha = collator_lifetime;
   this.lifetime = collator_lifetime;
-  this.children = [new attracted(ww,0,this),
-    new attracted(0,wh,this),
-    new attracted(ww,wh,this),
-    new attracted(0,0,this),
-    new attracted(ww/2,0,this),
-    new attracted(0,wh/2,this),
-    new attracted(ww/2,wh,this),
-    new attracted(ww,wh/2,this),];
+//   this.children = [new attracted(ww,0,this),
+//     new attracted(0,wh,this),
+//     new attracted(ww,wh,this),
+//     new attracted(0,0,this),
+//     new attracted(ww/2,0,this),
+//     new attracted(0,wh/2,this),
+//     new attracted(ww/2,wh,this),
+//     new attracted(ww,wh/2,this),];
+// }
+
+  this.children = this.fill();
 }
 
 collator_animation.prototype = {
+  fill: function(){
+    arr = [];
+    val = random(0,360);
+    for (let i = 0; i<=10; i++){
+      ang = map(i,0,10,0,360) + val;
+      // ang = 90;
+      arr.push(new attracted(ww/2 + Math.cos(ang)*raddist, wh/2 + Math.sin(ang)*raddist, this));
+      // arr.push(new attracted(ww/2,wh/2,this));
+    }
+    return arr;
+  },
   update: function(){
     if (this.lifetime <= 0){
       this.alive = false;
@@ -414,7 +428,6 @@ attracted.prototype = {
   update: function(){
     this.amount = map(this.lifetime,collator_lifetime,0,0,1);
     this.curpos = p5.Vector.lerp(this.pos,this.parent.pos,this.amount);
-    console.log(this.curpos);
     this.lifetime --;
   },
 
