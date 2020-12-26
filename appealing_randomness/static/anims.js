@@ -254,13 +254,14 @@ humongous_animation.prototype = {
 //   }
 // }
 
-function packer_animation(x,y){
+function packer_animation(x,y,cnt){
   this.alive = true;
   this.pos = createVector(x,y);
   this.rad = 200;
   this.alpha = 200;
   this.lifetime = 100;
   this.poppers = [];
+  this.cnt = cnt;
 }
 
 packer_animation.prototype = {
@@ -268,7 +269,7 @@ packer_animation.prototype = {
     nx = random(ww);
     ny = random(wh);
 
-    if (this.poppers.length > 20){
+    if (this.poppers.length > this.cnt){
       return;
     }
     this.poppers.push(new filled_circle(nx,ny));
@@ -357,5 +358,71 @@ thunder_animation.prototype = {
     else{
       set_color(255,255,255);
     }
+  }
+}
+
+
+function collator_animation(x,y){
+  this.alive = true;
+  this.pos = createVector(x,y);
+
+  this.lifetime = collator_lifetime;
+  this.alpha = map(this.lifetime,0,collator_lifetime,0,100);
+  this.children = this.fill();
+}
+
+collator_animation.prototype = {
+  fill: function(){
+    arr = [];
+    val = random(0,90);
+    for (let i = 0; i<=10; i++){
+      ang = map(i,0,10,0,360) + val;
+      // ang = 90;
+      arr.push(new attracted(ww/2 + Math.cos(ang)*raddist, wh/2 + Math.sin(ang)*raddist, this));
+      // arr.push(new attracted(ww/2,wh/2,this));
+    }
+    return arr;
+  },
+  update: function(){
+    if (this.lifetime <= 0){
+      this.alive = false;
+    }
+    for (let i=0; i<this.children.length; i++){
+      this.children[i].update();
+    }
+    this.lifetime--;
+    this.alpha--;
+  },
+  show: function(){
+    accent_col.setAlpha(this.alpha);
+    fill(accent_col);
+    // circle(this.pos.x,this.pos.y,100);
+    for (let i=0; i<this.children.length; i++){
+      this.children[i].show();
+    }
+  }
+
+}
+
+function attracted(x,y,parent){
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.parent = parent;
+  this.lifetime = collator_lifetime;
+  this.size = 20;
+
+  this.amount = 0;
+  this.curpos = this.pos.copy();
+}
+
+attracted.prototype = {
+  update: function(){
+    this.amount = map(this.lifetime,collator_lifetime,0,0,1);
+    this.curpos = p5.Vector.lerp(this.pos,this.parent.pos,this.amount);
+    this.lifetime --;
+  },
+
+  show: function(){
+    circle(this.curpos.x,this.curpos.y,this.size);
   }
 }

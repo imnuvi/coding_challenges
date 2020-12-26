@@ -53,6 +53,8 @@ function draw(){
       anims_list.splice(i--,1);
     }
   }
+
+  
 }
 
 

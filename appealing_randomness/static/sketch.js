@@ -4,9 +4,11 @@ let power_lifetime = 80;
 let explosion_lifetime = 30;
 let lightning_lifetime = 5;
 let humongous_lifetime = 60;
+let collator_lifetime = 30;
 
 let accent_col;
 let bg_col;
+let raddist;
 
 let bright = true;
 
@@ -40,7 +42,7 @@ function add_anim(random_selection,x,y){
 
   else if(random_selection == 4){
     // anim_array.push(new packer_animation(x,y));
-    anim_array.push(new packer_animation(x,y));
+    anim_array.push(new packer_animation(x,y,30));
   }
   else if(random_selection == 5){
     grav = ((random(-1,1)>0) ? 1 : -1 );
@@ -49,8 +51,11 @@ function add_anim(random_selection,x,y){
       anim_array.push(new Bubble(x,y,0,-1,((random(-1,1)>0) ? 1 : -1 )));
     }
   }
-
   else if(random_selection == 6){
+    anim_array.push(new collator_animation(x,y));
+  }
+
+  else if(random_selection == 7){
     for (let i=0; i<3; i++){
       anim_array.push(new gravity_animation(x,y,i));
       // console.log(anim_array);
@@ -68,18 +73,18 @@ function mouseReleased(){
   if (cur_rand){
     anim_array.push(new thunder_animation());
   }
-  add_anim(Math.floor(random(0,6)),mouseX,mouseY);
-  // add_anim(5,mouseX,mouseY);    // tester
+  // add_anim(Math.floor(random(1,6)),mouseX,mouseY);
+  add_anim(6,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 
 // function mouseMoved(){
-//   add_anim(1,mouseX,mouseY);
+//   add_anim(6,mouseX,mouseY);
 //   // add_anim(Math.floor(random(0,7)),mouseX,mouseY);
 // }
 
 function mouseDragged(){
-  add_anim(Math.floor(random(6,7)),mouseX,mouseY);
+  add_anim(Math.floor(random(7,8)),mouseX,mouseY);
 }
 
 // function mouseMoved(){
@@ -105,11 +110,12 @@ function init(){
   noStroke();
   ww = windowWidth;
   wh = windowHeight;
+  raddist = dist(ww/2,wh/2,0,0);
   canvas = createCanvas(ww,wh);
   canvas.style('z-index','-1');
   canvas.position(0,0);
 
-  set_color(0,0,0);
+  set_color(50,50,50);
 }
 
 
