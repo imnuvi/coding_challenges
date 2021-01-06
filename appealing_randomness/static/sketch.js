@@ -61,9 +61,11 @@ function add_anim(random_selection,x,y){
       // console.log(anim_array);
     }
   }
+}
 
-
-
+function keyPressed(){
+  // if (keyCode =)
+  console.log(keyCode);
 }
 
 function mouseReleased(){
@@ -105,6 +107,7 @@ function set_color(x,y,val){
   bg_col = (255-x,255-y, 255-val)
   accent_col = color(x,y,val);
 }
+
 function init(){
   pixelDensity(2);
   noStroke();
