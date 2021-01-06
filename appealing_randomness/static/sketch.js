@@ -64,8 +64,14 @@ function add_anim(random_selection,x,y){
 }
 
 function keyPressed(){
-  // if (keyCode =)
-  console.log(keyCode);
+  if (keyCode === 32){
+    if (bright){
+      set_color(50,50,50);
+    }
+    else{
+      set_color(255,255,255)
+    }
+  }
 }
 
 function mouseReleased(){
