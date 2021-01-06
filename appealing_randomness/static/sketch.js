@@ -73,8 +73,8 @@ function mouseReleased(){
   if (cur_rand){
     anim_array.push(new thunder_animation());
   }
-  // add_anim(Math.floor(random(1,6)),mouseX,mouseY);
-  add_anim(6,mouseX,mouseY);    // tester
+  add_anim(Math.floor(random(1,7)),mouseX,mouseY);
+  // add_anim(6,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 
