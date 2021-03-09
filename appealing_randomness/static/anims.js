@@ -409,7 +409,7 @@ function attracted(x,y,parent){
   this.pos = createVector(x,y);
   this.parent = parent;
   this.lifetime = collator_lifetime;
-  this.size = 20;
+  this.size = 10;
 
   this.amount = 0;
   this.curpos = this.pos.copy();

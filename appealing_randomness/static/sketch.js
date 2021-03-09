@@ -61,9 +61,17 @@ function add_anim(random_selection,x,y){
       // console.log(anim_array);
     }
   }
+}
 
-
-
+function keyPressed(){
+  if (keyCode === 32){
+    if (bright){
+      set_color(50,50,50);
+    }
+    else{
+      set_color(255,255,255)
+    }
+  }
 }
 
 function mouseReleased(){
@@ -73,8 +81,8 @@ function mouseReleased(){
   if (cur_rand){
     anim_array.push(new thunder_animation());
   }
-  // add_anim(Math.floor(random(1,6)),mouseX,mouseY);
-  add_anim(6,mouseX,mouseY);    // tester
+  add_anim(Math.floor(random(1,7)),mouseX,mouseY);
+  // add_anim(6,mouseX,mouseY);    // tester
   console.log(anim_array);
 }
 
@@ -105,6 +113,7 @@ function set_color(x,y,val){
   bg_col = (255-x,255-y, 255-val)
   accent_col = color(x,y,val);
 }
+
 function init(){
   pixelDensity(2);
   noStroke();
