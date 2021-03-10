@@ -1,21 +1,4 @@
 
-// array that holds all the rectangles drawn
-let rect_array = [];
-
-
-let my_canvas = document.getElementById("my_canvas");
-let my_context = my_canvas.getContext("2d");
-
-
-my_context.fillStyle = random_color();
-my_context.fillRect(0,0,my_canvas.width, my_canvas.height);
-
-my_context.fillStyle = 'blue';
-my_context.rect(50,50,100,100);
-my_context.fill();
-
-
-
 // random color generator
 function random_color(){
   let r = Math.floor(Math.random() * 254);
@@ -34,21 +17,25 @@ function my_rectangle(startx,starty,endx,endy){
   this.color = random_color();
 }
 
-my_rectangle.prototype = {
-  render: function(ctx){
-    ctx.beginPath();
-    ctx.rect(this.startx,this.starty,this.endx,this.endy);
-    ctx.fillStyle = this.color;
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(this.startx,this.starty,this.endx,this.endy);
-    ctx.fill();
-    // my_context.fillStyle = this.color;
-    // my_context.fillRect(this.startx,this.starty,this.endx,this.endy);
-  }
+
+function render(rect,ctx){
+  ctx.beginPath();
+  ctx.rect(rect.startx,rect.starty,rect.endx,rect.endy);
+  ctx.fillStyle = rect.color;
+  ctx.fillRect(rect.startx,rect.starty,rect.endx,rect.endy);
+  ctx.fill();
+  ctx.stroke();
 }
 
 
 
+
+// array that holds all the rectangles drawn
+let rect_array = [];
+
+
+let my_canvas = document.getElementById("my_canvas");
+let my_context = my_canvas.getContext("2d");
 
 
 // tests if its just a mouse move or a user trying to draw
@@ -58,15 +45,25 @@ let current_rect = new my_rectangle(0,0,0,0)
 
 
 
+
+
+
+
 function renderlist(){
 
 
   my_context.clearRect(0, 0, my_canvas.width, my_canvas.height);
   for(let i=0; i<rect_array.length; i++){
-    rect_array[i].render(my_context);
-    my_context.fill();
+    // rect_array[i].render(my_context);
+    render(rect_array[i],my_context);
   }
 }
+
+
+
+
+
+
 
 
 
@@ -112,7 +109,8 @@ function mover(e){
     current_rect.endx = e.x - current_rect.startx;
     current_rect.endy = e.y - current_rect.starty;
     renderlist();
-    current_rect.render(my_context);
+    // current_rect.render(my_context);
+    render(current_rect,my_context);
     my_context.fill();
   }
 
