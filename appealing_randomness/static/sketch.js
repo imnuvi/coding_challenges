@@ -5,6 +5,8 @@ let explosion_lifetime = 30;
 let lightning_lifetime = 5;
 let humongous_lifetime = 60;
 let collator_lifetime = 30;
+let start = true;
+let intext = null;
 
 let accent_col;
 let bg_col;
@@ -18,6 +20,10 @@ function random_color(){
 }
 
 function add_anim(random_selection,x,y){
+
+  if (start) {
+    start = false
+  }
 
   if (random_selection == 1){
     rad = random(30,100);
@@ -34,7 +40,7 @@ function add_anim(random_selection,x,y){
     }
   }
   else if(random_selection == 3){
-    console.log(anim_array);
+    // console.log(anim_array);
     for (let i=0; i<1; i++){
       anim_array.push(new humongous_animation(x,y,i));
     }
@@ -61,6 +67,10 @@ function add_anim(random_selection,x,y){
       // console.log(anim_array);
     }
   }
+  else if (random_selection == 100){
+      anim_array.push(new initial_text(x,y));
+    console.log(anim_array);
+  }
 }
 
 function keyPressed(){
@@ -72,18 +82,38 @@ function keyPressed(){
       set_color(255,255,255)
     }
   }
+  else {
+
+
+    // code for generating lightning animation - turning it off for now
+    cur_rand = ((random() > 0.95) ? 1 : 0);
+    // cur_rand = 1;
+
+    // if (cur_rand){
+    //   anim_array.push(new thunder_animation());
+    // }
+
+
+
+    // starting animation at a random location on screen
+    random_xpos = random(1,ww);
+    random_ypos = random(1,wh);
+    add_anim(Math.floor(random(1,7)),random_xpos,random_ypos);
+    // add_anim(6,mouseX,mouseY);    // tester
+    // console.log(anim_array);
+  }
 }
 
 function mouseReleased(){
   cur_rand = ((random() > 0.95) ? 1 : 0);
   // cur_rand = 1;
 
-  if (cur_rand){
-    anim_array.push(new thunder_animation());
-  }
+  // if (cur_rand){
+  //  anim_array.push(new thunder_animation());
+  // }
   add_anim(Math.floor(random(1,7)),mouseX,mouseY);
   // add_anim(6,mouseX,mouseY);    // tester
-  console.log(anim_array);
+  // console.log(anim_array);
 }
 
 // function mouseMoved(){
@@ -125,6 +155,8 @@ function init(){
   canvas.position(0,0);
 
   set_color(50,50,50);
+  // starting text
+  intext = new initial_text("Click or drag your mouse anywhere on the screen to get started" + "\n\n Press any key for randomness." + "\n\n press spacebar to change theme",ww/2,wh/2)
 }
 
 
@@ -148,6 +180,9 @@ function draw(){
     else{
       anim_array.splice(i--,1);
     }
+  }
+  if (start) {
+    intext.show();
   }
   // circle(mouseX,mouseY,100);
 }
