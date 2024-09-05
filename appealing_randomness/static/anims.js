@@ -426,3 +426,23 @@ attracted.prototype = {
     circle(this.curpos.x,this.curpos.y,this.size);
   }
 }
+
+function initial_text(text,x,y) {
+  this.alive = true;
+  this.pos = createVector(x,y);
+  this.text = text 
+  this.lifetime = 1000
+}
+
+initial_text.prototype = {
+  update: function(){
+    console.log(this.lifetime);
+  },
+
+  show: function(){
+    textFont('Courier New', 20);
+    textAlign(CENTER);
+    fill(accent_col);
+    text(this.text,this.pos.x,this.pos.y);
+  }
+}
